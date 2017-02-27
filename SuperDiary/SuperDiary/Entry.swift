@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import UIKit
+import CoreLocation
 
 class Entry: NSManagedObject {
     
@@ -19,4 +21,49 @@ class Entry: NSManagedObject {
         return request
     }()
     
+    class func entry(withNote note: String?, andImage image: UIImage?) -> Entry {
+        let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataStack.sharedInstance.managedObjectContext) as! Entry
+        
+        entry.date = Date().timeIntervalSince1970
+        
+        entry.note = note
+        
+        if let image = image {
+            entry.image = UIImageJPEGRepresentation(image, 1.0)
+        }
+        
+        return entry
+    }
+    
+    class func entry(withNote note: String?, image: UIImage?, and location: CLLocation) {
+        
+        let entry = Entry.entry(withNote: note, andImage: image)
+        entry.addLocation(location: location)
+        
+    }
+    
+    func addLocation(location: CLLocation?) {
+        if let location = location {
+            let entryLocation = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            self.location = entryLocation
+        }
+    }
+    
+}
+
+extension Entry {
+    
+    @NSManaged var date: TimeInterval
+    @NSManaged var note: String?
+    @NSManaged var image: Data?
+    @NSManaged var location: Location?
+    
+    var userImage: UIImage? {
+        
+        guard let image = image else {
+            return nil
+        }
+        
+        return UIImage(data: image)
+    }
 }
