@@ -17,12 +17,15 @@ class EntryListViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.delegate = self
         tableView.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = dataSource
+        navigationBarSetup()
         self.title = "Super Diary"
     }
     
@@ -38,6 +41,33 @@ class EntryListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
-
    
+}
+
+// MARK: - UITableViewControllerDelegate
+
+extension EntryListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell!")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+}
+
+// MARK: - Navigation
+
+extension EntryListViewController {
+    
+    func navigationBarSetup() {
+        let addEntryButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newEntryPressed))
+        navigationItem.rightBarButtonItem = addEntryButton
+    }
+    
+    func newEntryPressed() {
+        
+    }
 }
