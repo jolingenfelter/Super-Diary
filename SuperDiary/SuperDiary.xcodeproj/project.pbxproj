@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E56021F1E677259008930D8 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* NewEntryViewController.swift */; };
+		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
 		9E80E97B1E63898E006E36BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97A1E63898E006E36BF /* ViewController.swift */; };
 		9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97F1E63898E006E36BF /* SuperDiary.xcdatamodeld */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9E56021E1E677259008930D8 /* NewEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
+		9E56021E1E677259008930D8 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E80E9781E63898E006E36BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E80E97A1E63898E006E36BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +88,7 @@
 				9ED6CD6E1E644EC1000405AE /* CoreDataStack.swift */,
 				9EF5E0FD1E64E98100261450 /* EntryListViewController.swift */,
 				9EF5E1011E66482700261450 /* EntryFetchedResultsController.swift */,
+				9E56021E1E677259008930D8 /* EntryDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -107,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				9EF5E1041E664F4B00261450 /* EntryCell.swift */,
-				9E56021E1E677259008930D8 /* NewEntryViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 				9ED6CD751E6454D9000405AE /* Location.swift in Sources */,
 				9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */,
 				9EF5E1001E66473200261450 /* EntryDataSource.swift in Sources */,
-				9E56021F1E677259008930D8 /* NewEntryViewController.swift in Sources */,
+				9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */,
 				9EF5E1051E664F4B00261450 /* EntryCell.swift in Sources */,
 				9EF5E0FE1E64E98100261450 /* EntryListViewController.swift in Sources */,
 				9ED6CD6F1E644EC1000405AE /* CoreDataStack.swift in Sources */,
