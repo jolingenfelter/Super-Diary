@@ -15,7 +15,7 @@ class Entry: NSManagedObject {
     
     static let entityName = "\(Entry.self)"
     
-    static var allEntiesRequest: NSFetchRequest<NSFetchRequestResult> = {
+    static var allEntriesRequest: NSFetchRequest<NSFetchRequestResult> = {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entry.entityName)
         request.sortDescriptors = [NSSortDescriptor(key:"date", ascending: true)]
         return request
