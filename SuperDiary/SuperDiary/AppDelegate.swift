@@ -32,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
+        // NavigationBar Appearance
+        
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.barTintColor = UIColor.init(colorLiteralRed: 73/255, green: 163/255, blue: 192/255, alpha: 1)
+        navBarAppearance.tintColor = UIColor.white
+        
         return true
     }
 
