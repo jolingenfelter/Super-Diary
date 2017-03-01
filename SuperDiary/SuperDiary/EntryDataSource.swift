@@ -21,8 +21,6 @@ class EntryDataSource: NSObject {
         self.tableView = tableView
         self.fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, tableView: self.tableView)
         
-        print("data scource!")
-        
         super.init()
         
     }
@@ -38,7 +36,7 @@ class EntryDataSource: NSObject {
 extension EntryDataSource: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +48,14 @@ extension EntryDataSource: UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
     }
     
 }

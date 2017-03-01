@@ -49,10 +49,11 @@ class EntryListViewController: UIViewController {
 extension EntryListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell!")
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 100
     }
     
