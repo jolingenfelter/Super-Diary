@@ -23,7 +23,7 @@ class EntryListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Super Diary"
     }
     
     override func viewDidLayoutSubviews() {
