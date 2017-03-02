@@ -44,8 +44,12 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath) as! EntryCell
+        let entry = self.fetchedResultsController.object(at: indexPath) as! Entry
         
+        cell.entryDateLabel.text = dateFormatter.string(from: entry.date)
+        cell.entryTextLabel.text = entry.note
+        cell.entryImageView.image = entry.userImage
         
         return cell
     }

@@ -12,39 +12,40 @@ class EntryCell: UITableViewCell {
     
     static let reuseIdentifier = "\(EntryCell.self)"
     
-    let noteDateLabel = UILabel()
-    let noteTextLabel = UILabel()
-    let noteImageView = UIImageView()
+    let entryDateLabel = UILabel()
+    let entryTextLabel = UILabel()
+    let entryImageView = UIImageView()
     
     override func layoutSubviews() {
         
-        self.contentView.addSubview(noteImageView)
-        self.noteImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(entryImageView)
+        entryImageView.roundImage()
+        self.entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            noteImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
-            noteImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            noteImageView.heightAnchor.constraint(equalToConstant: 60),
-            noteImageView.widthAnchor.constraint(equalTo: noteImageView.heightAnchor)
+            entryImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            entryImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            entryImageView.heightAnchor.constraint(equalToConstant: 60),
+            entryImageView.widthAnchor.constraint(equalTo: entryImageView.heightAnchor)
             ])
         
-        self.contentView.addSubview(noteDateLabel)
-        self.noteDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(entryDateLabel)
+        self.entryDateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            noteDateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
-            noteDateLabel.leadingAnchor.constraint(equalTo: noteImageView.trailingAnchor, constant: 10),
-            noteDateLabel.widthAnchor.constraint(equalToConstant: 200),
-            noteDateLabel.heightAnchor.constraint(equalToConstant: 30)])
+            entryDateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
+            entryDateLabel.leadingAnchor.constraint(equalTo: entryImageView.trailingAnchor, constant: 10),
+            entryDateLabel.widthAnchor.constraint(equalToConstant: 200),
+            entryDateLabel.heightAnchor.constraint(equalToConstant: 30)])
         
-        self.contentView.addSubview(noteTextLabel)
-        self.noteTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(entryTextLabel)
+        self.entryTextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            noteTextLabel.topAnchor.constraint(equalTo: noteDateLabel.bottomAnchor, constant: 5),
-            noteTextLabel.leadingAnchor.constraint(equalTo: noteDateLabel.leadingAnchor),
-            noteTextLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
-            noteTextLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
+            entryTextLabel.topAnchor.constraint(equalTo: entryDateLabel.bottomAnchor, constant: 5),
+            entryTextLabel.leadingAnchor.constraint(equalTo: entryDateLabel.leadingAnchor),
+            entryTextLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            entryTextLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
             ])
         
         
@@ -61,19 +62,4 @@ class EntryCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(withEntry entry: Entry) {
-        
-        self.noteDateLabel.text = dateFormatter.string(from: entry.date)
-        self.noteTextLabel.text = entry.note
-        
-        if let image = entry.image {
-            self.noteImageView.image = UIImage(data: image as Data)
-            self.noteImageView.roundImage()
-        } else {
-            self.noteImageView.image = UIImage(named: "icn_noimage")
-            self.noteImageView.roundImage()
-        }
-        
-    }
-
 }
