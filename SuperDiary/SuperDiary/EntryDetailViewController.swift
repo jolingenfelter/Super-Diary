@@ -135,7 +135,7 @@ class EntryDetailViewController: UIViewController {
         addImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addImageButton.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -15),
+            addImageButton.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -5),
             addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             ])
         
@@ -173,6 +173,16 @@ extension EntryDetailViewController {
     
     func savePressed() {
         
+    }
+    
+}
+
+// MARK: - Gestures
+
+extension EntryDetailViewController {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
