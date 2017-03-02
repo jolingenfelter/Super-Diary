@@ -61,6 +61,34 @@ class EntryDetailViewController: UIViewController {
         imageView.layer.borderWidth = 1.5
         return imageView
     }()
+    
+    lazy var ratingButtonBar: UIStackView = {
+        
+        let superButton = UIButton()
+        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
+        superButton.imageView?.contentMode = .center
+        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        
+        let fineButton = UIButton()
+        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
+        fineButton.imageView?.contentMode = .center
+        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+        
+        let substandardButton = UIButton()
+        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
+        substandardButton.imageView?.contentMode = .center
+        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+        
+        let buttonsArray = [substandardButton, fineButton, superButton]
+        
+        let stackView = UIStackView(arrangedSubviews: buttonsArray)
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        
+        return stackView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +167,16 @@ class EntryDetailViewController: UIViewController {
             addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             ])
         
+        // RatingButtonBar
+        
+        view.addSubview(ratingButtonBar)
+        ratingButtonBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ratingButtonBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            ratingButtonBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ratingButtonBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            ratingButtonBar.heightAnchor.constraint(equalToConstant: 40)])
         
     }
     

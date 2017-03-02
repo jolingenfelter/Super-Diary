@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Rating: Int16 {
+enum Rating: NSNumber {
     
     case Super = 1
     case Fine = 2
