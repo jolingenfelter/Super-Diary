@@ -36,9 +36,29 @@ class EntryDetailViewController: UIViewController {
         return button
     }()
     
+    lazy var locationLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.lightGray
+        label.adjustsFontSizeToFitWidth = true
+        
+        return label
+    }()
+    
+    lazy var addImageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add image", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.addTarget(self, action: #selector(addImage), for: .touchUpInside)
+        
+        return button
+    }()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.layer.borderWidth = 1.5
         return imageView
     }()
 
@@ -50,6 +70,11 @@ class EntryDetailViewController: UIViewController {
         
         // Show data of pre-existing note
         noteTextView.text = entry?.note
+        
+        if entry == nil {
+            imageView.contentMode = .center
+            imageView.image = UIImage(named: "icn_noimage")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +83,8 @@ class EntryDetailViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        
+        // TextView
         
         view.addSubview(noteTextView)
         noteTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,24 +95,59 @@ class EntryDetailViewController: UIViewController {
             noteTextView.topAnchor.constraint(equalTo: (navigationController?.navigationBar.bottomAnchor)!, constant: 20),
             noteTextView.heightAnchor.constraint(equalToConstant: 200)])
         
+        // AddLocationButton
+        
         view.addSubview(addLocationButton)
         addLocationButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addLocationButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 15),
+            addLocationButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 10),
             addLocationButton.leadingAnchor.constraint(equalTo: noteTextView.leadingAnchor),
             addLocationButton.heightAnchor.constraint(equalToConstant: 35),
             addLocationButton.widthAnchor.constraint(equalToConstant: 150)])
         
+        // LocationLabel
+        
+        view.addSubview(locationLabel)
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            locationLabel.leadingAnchor.constraint(equalTo: addLocationButton.leadingAnchor),
+            locationLabel.topAnchor.constraint(equalTo: addLocationButton.bottomAnchor, constant: 5),
+            locationLabel.heightAnchor.constraint(equalToConstant: 20),
+            locationLabel.widthAnchor.constraint(equalToConstant: 200)])
+        
+        // ImageView
+        
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            imageView.heightAnchor.constraint(equalToConstant: 200)])
+        
+        // AddImageButton
+        
+        view.addSubview(addImageButton)
+        addImageButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addImageButton.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -15),
+            addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            ])
         
         
     }
     
-    // MARK: - Location
+    // MARK: - Buttons
     
     func addLocation() {
+        
+    }
+    
+    func addImage() {
         
     }
 }
