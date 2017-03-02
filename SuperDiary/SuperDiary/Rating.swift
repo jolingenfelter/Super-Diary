@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum Rating: NSNumber {
+enum Rating: String {
     
-    case Super = 1
-    case Fine = 2
-    case Substandard = 3
+    case Super
+    case Fine
+    case Substandard
     
 }
