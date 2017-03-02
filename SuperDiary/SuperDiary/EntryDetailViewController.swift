@@ -75,6 +75,7 @@ class EntryDetailViewController: UIViewController {
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

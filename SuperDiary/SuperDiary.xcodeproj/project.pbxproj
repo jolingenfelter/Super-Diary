@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
+		9E5602211E67A91F008930D8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5602201E67A91F008930D8 /* Rating.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
 		9E80E97B1E63898E006E36BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97A1E63898E006E36BF /* ViewController.swift */; };
 		9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97F1E63898E006E36BF /* SuperDiary.xcdatamodeld */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		9E56021E1E677259008930D8 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
+		9E5602201E67A91F008930D8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E80E9781E63898E006E36BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E80E97A1E63898E006E36BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				9ED6CD761E6454F1000405AE /* Entry.swift */,
 				9ED6CD741E6454D9000405AE /* Location.swift */,
 				9EF5E0FF1E66473200261450 /* EntryDataSource.swift */,
+				9E5602201E67A91F008930D8 /* Rating.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5602211E67A91F008930D8 /* Rating.swift in Sources */,
 				9ED6CD771E6454F1000405AE /* Entry.swift in Sources */,
 				9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */,
 				9E80E97B1E63898E006E36BF /* ViewController.swift in Sources */,

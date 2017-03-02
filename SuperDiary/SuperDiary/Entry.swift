@@ -21,7 +21,7 @@ class Entry: NSManagedObject {
         return request
     }()
     
-    class func entry(withNote note: String?, andImage image: UIImage?) -> Entry {
+    class func entry(withNote note: String?, Image image: UIImage?, andRating rating: NSNumber?) -> Entry {
         let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataStack.sharedInstance.managedObjectContext) as! Entry
         
         entry.date = Date().timeIntervalSince1970
@@ -32,12 +32,14 @@ class Entry: NSManagedObject {
             entry.image = UIImageJPEGRepresentation(image, 1.0)
         }
         
+        entry.rating = rating
+        
         return entry
     }
     
-    class func entry(withNote note: String?, image: UIImage?, and location: CLLocation) {
+    class func entry(withNote note: String?, image: UIImage?, rating: NSNumber?, and location: CLLocation) {
         
-        let entry = Entry.entry(withNote: note, andImage: image)
+        let entry = Entry.entry(withNote: note, Image: image, andRating: rating)
         entry.addLocation(location: location)
         
     }
@@ -57,6 +59,7 @@ extension Entry {
     @NSManaged var note: String?
     @NSManaged var image: Data?
     @NSManaged var location: Location?
+    @NSManaged var rating: NSNumber?
     
     var userImage: UIImage? {
         
