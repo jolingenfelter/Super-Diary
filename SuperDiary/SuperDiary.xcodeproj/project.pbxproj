@@ -10,13 +10,14 @@
 		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
 		9E5602211E67A91F008930D8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5602201E67A91F008930D8 /* Rating.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
-		9E80E97B1E63898E006E36BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97A1E63898E006E36BF /* ViewController.swift */; };
 		9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E97F1E63898E006E36BF /* SuperDiary.xcdatamodeld */; };
 		9E80E9831E63898E006E36BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E80E9821E63898E006E36BF /* Assets.xcassets */; };
 		9E80E9861E63898E006E36BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E80E9841E63898E006E36BF /* LaunchScreen.storyboard */; };
 		9ED6CD6F1E644EC1000405AE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CD6E1E644EC1000405AE /* CoreDataStack.swift */; };
 		9ED6CD751E6454D9000405AE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CD741E6454D9000405AE /* Location.swift */; };
 		9ED6CD771E6454F1000405AE /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CD761E6454F1000405AE /* Entry.swift */; };
+		9EDF47FB1E68D41100E7D2EB /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */; };
+		9EDF47FD1E68D63900E7D2EB /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */; };
 		9EF5E0FE1E64E98100261450 /* EntryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E0FD1E64E98100261450 /* EntryListViewController.swift */; };
 		9EF5E1001E66473200261450 /* EntryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E0FF1E66473200261450 /* EntryDataSource.swift */; };
 		9EF5E1021E66482700261450 /* EntryFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E1011E66482700261450 /* EntryFetchedResultsController.swift */; };
@@ -28,7 +29,6 @@
 		9E5602201E67A91F008930D8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E80E9781E63898E006E36BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9E80E97A1E63898E006E36BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E80E9801E63898E006E36BF /* SuperDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SuperDiary.xcdatamodel; sourceTree = "<group>"; };
 		9E80E9821E63898E006E36BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E80E9851E63898E006E36BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +36,8 @@
 		9ED6CD6E1E644EC1000405AE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9ED6CD741E6454D9000405AE /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9ED6CD761E6454F1000405AE /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		9EF5E0FD1E64E98100261450 /* EntryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListViewController.swift; sourceTree = "<group>"; };
 		9EF5E0FF1E66473200261450 /* EntryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDataSource.swift; sourceTree = "<group>"; };
 		9EF5E1011E66482700261450 /* EntryFetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryFetchedResultsController.swift; sourceTree = "<group>"; };
@@ -73,10 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				9E80E9781E63898E006E36BF /* AppDelegate.swift */,
-				9E80E97A1E63898E006E36BF /* ViewController.swift */,
 				9ED6CD711E6454B1000405AE /* Model */,
 				9ED6CD701E6454A6000405AE /* Controllers */,
 				9EF5E1031E664F2F00261450 /* View */,
+				9EDF47F91E68D3F200E7D2EB /* Helpers */,
 				9E80E9821E63898E006E36BF /* Assets.xcassets */,
 				9E80E9841E63898E006E36BF /* LaunchScreen.storyboard */,
 				9E80E9871E63898E006E36BF /* Info.plist */,
@@ -105,6 +107,15 @@
 				9E5602201E67A91F008930D8 /* Rating.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		9EDF47F91E68D3F200E7D2EB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */,
+				9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		9EF5E1031E664F2F00261450 /* View */ = {
@@ -190,8 +201,8 @@
 				9E5602211E67A91F008930D8 /* Rating.swift in Sources */,
 				9ED6CD771E6454F1000405AE /* Entry.swift in Sources */,
 				9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */,
-				9E80E97B1E63898E006E36BF /* ViewController.swift in Sources */,
 				9ED6CD751E6454D9000405AE /* Location.swift in Sources */,
+				9EDF47FD1E68D63900E7D2EB /* DateFormatter.swift in Sources */,
 				9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */,
 				9EF5E1001E66473200261450 /* EntryDataSource.swift in Sources */,
 				9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */,
@@ -199,6 +210,7 @@
 				9EF5E0FE1E64E98100261450 /* EntryListViewController.swift in Sources */,
 				9ED6CD6F1E644EC1000405AE /* CoreDataStack.swift in Sources */,
 				9EF5E1021E66482700261450 /* EntryFetchedResultsController.swift in Sources */,
+				9EDF47FB1E68D41100E7D2EB /* RoundImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

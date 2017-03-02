@@ -24,7 +24,7 @@ class Entry: NSManagedObject {
     class func entry(withNote note: String?, Image image: UIImage?, andRating rating: String?) -> Entry {
         let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataStack.sharedInstance.managedObjectContext) as! Entry
         
-        entry.date = Date().timeIntervalSince1970
+        entry.date = Date()
         
         entry.note = note
         
@@ -55,11 +55,11 @@ class Entry: NSManagedObject {
 
 extension Entry {
     
-    @NSManaged var date: TimeInterval
-    @NSManaged var note: String?
-    @NSManaged var image: Data?
-    @NSManaged var location: Location?
-    @NSManaged var rating: String?
+    @NSManaged public var date: Date
+    @NSManaged public var note: String?
+    @NSManaged public var image: Data?
+    @NSManaged public var location: Location?
+    @NSManaged public var rating: String?
     
     var userImage: UIImage? {
         
