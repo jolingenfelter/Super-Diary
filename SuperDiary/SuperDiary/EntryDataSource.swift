@@ -49,7 +49,12 @@ extension EntryDataSource: UITableViewDataSource {
         
         cell.entryDateLabel.text = dateFormatter.string(from: entry.date)
         cell.entryTextLabel.text = entry.note
-        cell.entryImageView.image = entry.userImage
+        
+        if entry.userImage != nil {
+            cell.entryImageView.image = entry.userImage
+        } else {
+            cell.entryImageView.image = UIImage(named: "icn_noimage")
+        }
         
         return cell
     }

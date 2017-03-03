@@ -12,6 +12,7 @@ class EntryDetailViewController: UIViewController {
     
     let coreDataStack = CoreDataStack.sharedInstance
     var entry: Entry?
+    var selectedMood: Rating?
     
     // View Variables
     
@@ -97,13 +98,27 @@ class EntryDetailViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         // Show data of pre-existing note
-        noteTextView.text = entry?.note
+        guard let entry = entry else {
+            return
+        }
         
-        if entry == nil {
+        configureView(withEntry: entry)
+    }
+    
+    fileprivate func configureView(withEntry entry: Entry) {
+        
+        noteTextView.text = entry.note
+        
+        if let image = entry.userImage {
+            self.imageView.image = image
+            addImageButton.setTitle("Edit Image", for: .normal)
+        } else {
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
         }
         
+        // TODO: - Location
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -210,6 +225,17 @@ extension EntryDetailViewController {
     }
     
     func savePressed() {
+        
+        if let entry = self.entry {
+            
+            entry.note = noteTextView.text
+            
+            coreDataStack.saveContext()
+            
+        } else {
+            Entry.entry(withNote: noteTextView.text, image: nil, rating: nil, and: nil)
+            coreDataStack.saveContext()
+        }
         
     }
     
