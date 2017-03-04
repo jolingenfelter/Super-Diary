@@ -45,6 +45,12 @@ class EntryDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var mediaPickerManager: MediaPickerManager = {
+        let manager = MediaPickerManager(presentingViewController: self)
+        manager.delegate = self
+        return manager
+    }()
+    
     lazy var addImageButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add image", for: .normal)
@@ -193,8 +199,9 @@ class EntryDetailViewController: UIViewController {
     }
     
     func addImage() {
-        
+        mediaPickerManager.presentImagePickerController(animated: true)
     }
+    
 }
 
 // MARK: - Navigation
@@ -300,6 +307,16 @@ extension EntryDetailViewController {
     
     func substandardSelected() {
         setRating(rating: Rating.Substandard)
+    }
+    
+}
+
+// MARK: - MediaPickerManagerDelegate
+
+extension EntryDetailViewController: MediaPickerManagerDelegate {
+    
+    func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
+        
     }
     
 }
