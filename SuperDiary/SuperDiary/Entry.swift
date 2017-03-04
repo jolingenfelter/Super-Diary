@@ -21,23 +21,21 @@ class Entry: NSManagedObject {
         return request
     }()
     
-    class func entry(withNote note: String?, Image image: UIImage?, andRating rating: String?) -> Entry {
+    class func entry(withNote note: String?, Image image: Data?, andRating rating: String?) -> Entry {
         let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataStack.sharedInstance.managedObjectContext) as! Entry
         
         entry.date = Date()
         
         entry.note = note
         
-        if let image = image {
-            entry.image = UIImageJPEGRepresentation(image, 1.0)
-        }
+        entry.image = image
         
         entry.rating = rating
         
         return entry
     }
     
-    class func entry(withNote note: String?, image: UIImage?, rating: String?, and location: CLLocation?) {
+    class func entry(withNote note: String?, image: Data?, rating: String?, and location: CLLocation?) {
         
         let entry = Entry.entry(withNote: note, Image: image, andRating: rating)
         entry.addLocation(location: location)

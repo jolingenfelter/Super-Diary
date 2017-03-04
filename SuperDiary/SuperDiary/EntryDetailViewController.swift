@@ -13,6 +13,7 @@ class EntryDetailViewController: UIViewController {
     let coreDataStack = CoreDataStack.sharedInstance
     var entry: Entry?
     var selectedRating: Rating?
+    var imageData: Data?
     
     // Views
     
@@ -232,7 +233,7 @@ extension EntryDetailViewController {
             coreDataStack.saveContext()
             
         } else {
-            Entry.entry(withNote: noteTextView.text, image: nil, rating: selectedRating?.rawValue, and: nil)
+            Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: nil)
             coreDataStack.saveContext()
         }
         
@@ -316,7 +317,12 @@ extension EntryDetailViewController {
 extension EntryDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
-        
+        manager.dismissImagePickerController(animated: true) {
+            self.imageView.image = image
+            print(self.imageView.frame.size)
+            print(image.size)
+            self.imageData = UIImageJPEGRepresentation(image, 1.0)
+        }
     }
     
 }
