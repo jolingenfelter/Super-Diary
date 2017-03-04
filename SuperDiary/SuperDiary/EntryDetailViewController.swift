@@ -21,6 +21,7 @@ class EntryDetailViewController: UIViewController {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1.5
+        textView.font = .systemFont(ofSize: 14)
        
         return textView
     }()
@@ -318,10 +319,12 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         manager.dismissImagePickerController(animated: true) {
-            self.imageView.image = image
-            print(self.imageView.frame.size)
-            print(image.size)
-            self.imageData = UIImageJPEGRepresentation(image, 1.0)
+            
+            let imageViewSize = self.imageView.frame.size
+            let resizedImage = image.resizedImage(newSize: imageViewSize)
+            
+            self.imageView.image = resizedImage
+            self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
         }
     }
     
