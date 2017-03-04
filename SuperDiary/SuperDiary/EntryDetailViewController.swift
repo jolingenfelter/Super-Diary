@@ -230,6 +230,7 @@ extension EntryDetailViewController {
             
             entry.note = noteTextView.text
             entry.rating = selectedRating?.rawValue
+            entry.image = imageData
             
             coreDataStack.saveContext()
             
