@@ -12,7 +12,7 @@ class EntryDetailViewController: UIViewController {
     
     let coreDataStack = CoreDataStack.sharedInstance
     var entry: Entry?
-    var selectedMood: Rating?
+    var selectedRating: Rating?
     
     // View Variables
     
@@ -63,37 +63,42 @@ class EntryDetailViewController: UIViewController {
         return imageView
     }()
     
-    lazy var ratingButtonBar: UIStackView = {
-        
-        let superButton = UIButton()
-        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
-        superButton.imageView?.contentMode = .center
-        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
-        
-        let fineButton = UIButton()
-        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
-        fineButton.imageView?.contentMode = .center
-        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
-        
-        let substandardButton = UIButton()
-        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
-        substandardButton.imageView?.contentMode = .center
-        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
-        
-        let buttonsArray = [substandardButton, fineButton, superButton]
-        
-        let stackView = UIStackView(arrangedSubviews: buttonsArray)
-        stackView.axis = .horizontal
-        stackView.spacing = 0
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        
-        return stackView
-    }()
+    let superButton = UIButton()
+    let fineButton = UIButton()
+    let substandardButton = UIButton()
+    
+//    lazy var ratingButtonBar: UIStackView = {
+//        
+//        let superButton = UIButton()
+//        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
+//        superButton.imageView?.contentMode = .center
+//        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+//        
+//        let fineButton = UIButton()
+//        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
+//        fineButton.imageView?.contentMode = .center
+//        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+//        
+//        let substandardButton = UIButton()
+//        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
+//        substandardButton.imageView?.contentMode = .center
+//        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+//        
+//        let buttonsArray = [substandardButton, fineButton, superButton]
+//        
+//        let stackView = UIStackView(arrangedSubviews: buttonsArray)
+//        stackView.axis = .horizontal
+//        stackView.spacing = 0
+//        stackView.distribution = .fillEqually
+//        stackView.alignment = .fill
+//        
+//        return stackView
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navbarSetup()
+        setupRatingButtons()
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
         
@@ -184,6 +189,14 @@ class EntryDetailViewController: UIViewController {
         
         // RatingButtonBar
         
+        let buttonsArray = [substandardButton, fineButton, superButton]
+        
+        let ratingButtonBar = UIStackView(arrangedSubviews: buttonsArray)
+        ratingButtonBar.axis = .horizontal
+        ratingButtonBar.spacing = 0
+        ratingButtonBar.distribution = .fillEqually
+        ratingButtonBar.alignment = .fill
+        
         view.addSubview(ratingButtonBar)
         ratingButtonBar.translatesAutoresizingMaskIntoConstraints = false
         
@@ -238,6 +251,50 @@ extension EntryDetailViewController {
         }
         
     }
+    
+}
+
+// MARK: - SetRating
+
+extension EntryDetailViewController {
+    
+    func setupRatingButtons() {
+        
+        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
+        superButton.imageView?.contentMode = .center
+        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        
+        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
+        fineButton.imageView?.contentMode = .center
+        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+        
+        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
+        substandardButton.imageView?.contentMode = .center
+        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+
+        
+    }
+    
+    func setRating(rating: Rating) {
+        
+        switch rating {
+            
+        case .Super:
+            
+            selectedRating = Rating.Super
+        
+        case .Fine:
+            
+            selectedRating = Rating.Fine
+        
+        case .Substandard:
+            selectedRating = Rating.Substandard
+            
+        }
+        
+    }
+    
+    
     
 }
 
