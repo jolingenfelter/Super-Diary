@@ -225,7 +225,7 @@ extension EntryDetailViewController {
             coreDataStack.saveContext()
             
         } else {
-            Entry.entry(withNote: noteTextView.text, image: nil, rating: nil, and: nil)
+            Entry.entry(withNote: noteTextView.text, image: nil, rating: selectedRating?.rawValue, and: nil)
             coreDataStack.saveContext()
         }
         
