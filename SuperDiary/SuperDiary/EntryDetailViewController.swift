@@ -14,7 +14,7 @@ class EntryDetailViewController: UIViewController {
     var entry: Entry?
     var selectedRating: Rating?
     
-    // View Variables
+    // Views
     
     lazy var noteTextView: UITextView = {
         let textView = UITextView()
@@ -63,38 +63,11 @@ class EntryDetailViewController: UIViewController {
         return imageView
     }()
     
+    // Rating Buttons
     let superButton = UIButton()
     let fineButton = UIButton()
     let substandardButton = UIButton()
     
-//    lazy var ratingButtonBar: UIStackView = {
-//        
-//        let superButton = UIButton()
-//        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
-//        superButton.imageView?.contentMode = .center
-//        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
-//        
-//        let fineButton = UIButton()
-//        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
-//        fineButton.imageView?.contentMode = .center
-//        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
-//        
-//        let substandardButton = UIButton()
-//        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
-//        substandardButton.imageView?.contentMode = .center
-//        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
-//        
-//        let buttonsArray = [substandardButton, fineButton, superButton]
-//        
-//        let stackView = UIStackView(arrangedSubviews: buttonsArray)
-//        stackView.axis = .horizontal
-//        stackView.spacing = 0
-//        stackView.distribution = .fillEqually
-//        stackView.alignment = .fill
-//        
-//        return stackView
-//    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         navbarSetup()
@@ -102,24 +75,29 @@ class EntryDetailViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
         
-        // Show data of pre-existing note
-        guard let entry = entry else {
-            return
-        }
         
         configureView(withEntry: entry)
     }
     
-    fileprivate func configureView(withEntry entry: Entry) {
+    fileprivate func configureView(withEntry entry: Entry?) {
         
-        noteTextView.text = entry.note
+        noteTextView.text = entry?.note
         
-        if let image = entry.userImage {
+        if let image = entry?.userImage {
             self.imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
         } else {
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
+        }
+        
+        if let rating = entry?.rating {
+            let savedRating = Rating(rawValue: rating)
+            setRating(rating: savedRating!)
+        } else {
+            self.superButton.alpha = 0.5
+            self.fineButton.alpha = 0.5
+            self.substandardButton.alpha = 0.5
         }
         
         // TODO: - Location
@@ -242,6 +220,7 @@ extension EntryDetailViewController {
         if let entry = self.entry {
             
             entry.note = noteTextView.text
+            entry.rating = selectedRating?.rawValue
             
             coreDataStack.saveContext()
             
@@ -263,38 +242,65 @@ extension EntryDetailViewController {
         superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
         superButton.imageView?.contentMode = .center
         superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        superButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
         
         fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
         fineButton.imageView?.contentMode = .center
         fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+        fineButton.addTarget(self, action: #selector(fineSelected), for: .touchUpInside)
         
         substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
         substandardButton.imageView?.contentMode = .center
         substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+        substandardButton.addTarget(self, action: #selector(substandardSelected), for: .touchUpInside)
 
         
     }
     
     func setRating(rating: Rating) {
         
+        self.superButton.alpha = 0.5
+        self.fineButton.alpha = 0.5
+        self.substandardButton.alpha = 0.5
+        
         switch rating {
             
         case .Super:
             
             selectedRating = Rating.Super
+            superButton.alpha = 1.0
+            
+            break
         
         case .Fine:
             
             selectedRating = Rating.Fine
+            fineButton.alpha = 1.0
+            
+            break
         
         case .Substandard:
+            
             selectedRating = Rating.Substandard
+            substandardButton.alpha = 1.0
+            
+            break
             
         }
         
     }
     
+    func superSelected() {
+        setRating(rating: Rating.Super)
+    }
     
+    func fineSelected() {
+        setRating(rating: Rating.Fine)
+    }
+    
+    func substandardSelected() {
+        setRating(rating: Rating.Substandard)
+    }
     
 }
 
