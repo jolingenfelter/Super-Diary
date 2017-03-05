@@ -20,6 +20,7 @@ class EntryCell: UITableViewCell {
         
         self.contentView.addSubview(entryImageView)
         entryImageView.roundImage()
+        entryImageView.contentMode = .scaleToFill
         self.entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

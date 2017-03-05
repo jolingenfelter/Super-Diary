@@ -90,8 +90,10 @@ class EntryDetailViewController: UIViewController {
     fileprivate func configureView(withEntry entry: Entry?) {
         
         noteTextView.text = entry?.note
+        imageData = entry?.image
         
-        if let image = entry?.userImage {
+        if let data = entry?.image {
+            let image = UIImage(data: data as Data)
             self.imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
         } else {
@@ -326,8 +328,10 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
             let imageViewSize = self.imageView.frame.size
             let resizedImage = image.resizedImageWithinRect(rectSize: imageViewSize)
             
+            print(imageViewSize, resizedImage)
+            
             self.imageView.image = resizedImage
-            self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
+            self.imageData = UIImageJPEGRepresentation(image, 1.0)
         }
     }
     
