@@ -253,6 +253,7 @@ class EntryDetailViewController: UIViewController {
     }
     
     // MARK: - Buttons
+    // Add Location
     
     func addLocation() {
         
@@ -281,8 +282,27 @@ class EntryDetailViewController: UIViewController {
         
     }
     
+    // AddImage
+    
     func addImage() {
-        mediaPickerManager.presentImagePickerController(animated: true)
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            self.mediaPickerManager.presentImagePickerController(animated: true, andSourceType: .camera)
+        }
+        actionSheet.addAction(cameraAction)
+        
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            self.mediaPickerManager.presentImagePickerController(animated: true, andSourceType: .photoLibrary)
+        }
+        actionSheet.addAction(libraryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
     }
     
 }

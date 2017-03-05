@@ -21,22 +21,29 @@ class MediaPickerManager: NSObject {
     weak var delegate: MediaPickerManagerDelegate?
     
     init(presentingViewController: UIViewController) {
+        
         self.presentingViewController = presentingViewController
         super.init()
         
         imagePickerController.delegate = self
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePickerController.sourceType = .camera
-            imagePickerController.cameraDevice = .front
-        } else {
-            imagePickerController.sourceType = .photoLibrary
-        }
-        
         imagePickerController.mediaTypes = [kUTTypeImage as String]
+        
     }
     
-    func presentImagePickerController(animated: Bool) {
+    func presentImagePickerController(animated: Bool, andSourceType sourceType: UIImagePickerControllerSourceType) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            
+            if sourceType == .camera {
+                imagePickerController.sourceType = .camera
+                imagePickerController.cameraDevice = .rear
+                
+            }else {
+                imagePickerController.sourceType = .photoLibrary
+            }
+        }
+        
         presentingViewController.present(imagePickerController, animated: animated, completion: nil)
     }
     
