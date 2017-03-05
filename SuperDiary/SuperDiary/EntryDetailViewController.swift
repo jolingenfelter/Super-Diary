@@ -130,7 +130,33 @@ class EntryDetailViewController: UIViewController {
             self.substandardButton.alpha = 0.5
         }
         
-        // TODO: - Location
+        if let location = entry?.location {
+            
+            addLocationButton.setTitle("Location", for: .normal)
+            addLocationButton.isEnabled = false
+            
+            locationManager = LocationManager()
+            
+            let latitude = location.latitude
+            let longitude = location.longitude
+            
+            let locationPoint = CLLocation(latitude: latitude, longitude: longitude)
+            
+            locationManager.getPlacemark(forLocation: locationPoint) { placemark, error in
+                
+                if let error = error {
+                    print(error)
+                } else if let placemark = placemark {
+                    
+                    guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
+                    
+                    self.locationLabel.text = "\(name), \(city), \(area)"
+                }
+
+                
+            }
+            
+        }
     
     }
 
@@ -284,10 +310,18 @@ extension EntryDetailViewController {
             entry.rating = selectedRating?.rawValue
             entry.image = imageData
             
+            guard let location = location else {
+                return
+            }
+            
+            let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            
+            entry.location = locationToSave
+            
             coreDataStack.saveContext()
             
         } else {
-            Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: nil)
+            Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
             coreDataStack.saveContext()
         }
         

@@ -27,6 +27,30 @@ class LocationManager: NSObject {
             manager.requestWhenInUseAuthorization()
         }
     }
+    
+    // Location from Coordinates
+    func getPlacemark(forLocation location: CLLocation, completionHandler: @escaping (CLPlacemark?, String?) -> ()) {
+        
+        geocoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+            
+            if let error = error {
+                completionHandler(nil, error.localizedDescription)
+                
+            } else if let placemarkArray = placemarks {
+                
+                if let placemark = placemarkArray.first {
+                    completionHandler(placemark, nil)
+                    
+                } else {
+                    completionHandler(nil, "Placemark was nil")
+                }
+            } else {
+                completionHandler(nil, "Unknown error")
+            }
+        })
+        
+    }
+
 
 }
 
