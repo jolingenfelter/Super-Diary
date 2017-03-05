@@ -310,13 +310,13 @@ extension EntryDetailViewController {
             entry.rating = selectedRating?.rawValue
             entry.image = imageData
             
-            guard let location = location else {
-                return
+            if let location = location {
+                
+                let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                
+                entry.location = locationToSave
+                
             }
-            
-            let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            
-            entry.location = locationToSave
             
             coreDataStack.saveContext()
             
