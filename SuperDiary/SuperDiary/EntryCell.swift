@@ -18,6 +18,8 @@ class EntryCell: UITableViewCell {
     
     override func layoutSubviews() {
         
+        // MARK: - ImageView
+        
         self.contentView.addSubview(entryImageView)
         entryImageView.roundImage()
         entryImageView.contentMode = .scaleToFill
@@ -30,6 +32,8 @@ class EntryCell: UITableViewCell {
             entryImageView.widthAnchor.constraint(equalTo: entryImageView.heightAnchor)
             ])
         
+        // MARK: - DateLabel
+        
         self.contentView.addSubview(entryDateLabel)
         entryDateLabel.textColor = UIColor(colorLiteralRed: 39/255, green: 107/255, blue: 134/255, alpha: 1)
         entryDateLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
@@ -40,6 +44,8 @@ class EntryCell: UITableViewCell {
             entryDateLabel.leadingAnchor.constraint(equalTo: entryImageView.trailingAnchor, constant: 10),
             entryDateLabel.widthAnchor.constraint(equalToConstant: 200),
             entryDateLabel.heightAnchor.constraint(equalToConstant: 25)])
+        
+        // MARK: - TextLabel
         
         self.contentView.addSubview(entryTextLabel)
         entryTextLabel.textColor = UIColor.lightGray

@@ -13,7 +13,7 @@ extension UIImageView {
     
     func roundImage() {
         self.layer.cornerRadius = self.frame.size.height/2
-        self.layer.masksToBounds = false
+        self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
     

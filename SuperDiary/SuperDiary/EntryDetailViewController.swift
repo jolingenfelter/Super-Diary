@@ -92,9 +92,15 @@ class EntryDetailViewController: UIViewController {
     fileprivate func configureView(withEntry entry: Entry?) {
         
         noteTextView.text = entry?.note
-        imageData = entry?.image
+        
+        if let date = entry?.date {
+            self.title = dateFormatter.string(from: date)
+        } else {
+            self.title = dateFormatter.string(from: Date())
+        }
         
         if let data = entry?.image {
+            imageData = entry?.image
             let image = UIImage(data: data as Data)
             imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
