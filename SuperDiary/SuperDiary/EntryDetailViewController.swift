@@ -141,6 +141,7 @@ class EntryDetailViewController: UIViewController {
             let longitude = location.longitude
             
             let locationPoint = CLLocation(latitude: latitude, longitude: longitude)
+            self.location = locationPoint
             
             locationManager.getPlacemark(forLocation: locationPoint) { placemark, error in
                 
