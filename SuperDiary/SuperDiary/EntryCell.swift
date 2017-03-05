@@ -15,6 +15,7 @@ class EntryCell: UITableViewCell {
     let entryDateLabel = UILabel()
     let entryTextLabel = UILabel()
     let entryImageView = UIImageView()
+    let ratingImageView = UIImageView()
     
     override func layoutSubviews() {
         
@@ -31,6 +32,19 @@ class EntryCell: UITableViewCell {
             entryImageView.heightAnchor.constraint(equalToConstant: 60),
             entryImageView.widthAnchor.constraint(equalTo: entryImageView.heightAnchor)
             ])
+        
+        // MARK: - RatingImageView
+        
+        self.contentView.addSubview(ratingImageView)
+        ratingImageView.roundImage()
+        ratingImageView.contentMode = .scaleToFill
+        self.ratingImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ratingImageView.centerXAnchor.constraint(equalTo: entryImageView.centerXAnchor, constant: 20),
+            ratingImageView.topAnchor.constraint(equalTo: entryImageView.centerYAnchor, constant: 15),
+            ratingImageView.heightAnchor.constraint(equalToConstant: 25),
+            ratingImageView.widthAnchor.constraint(equalTo: ratingImageView.heightAnchor)])
         
         // MARK: - DateLabel
         

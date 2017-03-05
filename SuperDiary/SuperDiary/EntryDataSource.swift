@@ -56,6 +56,30 @@ extension EntryDataSource: UITableViewDataSource {
             cell.entryImageView.image = UIImage(named: "icn_noimage")
         }
         
+        if let entryRating = entry.rating {
+            
+            cell.ratingImageView.isHidden = false
+            let rating = Rating(rawValue: entryRating)!
+            
+            switch rating {
+            
+            case .Super:
+                
+                cell.ratingImageView.image = UIImage(named: "icn_happy")
+                
+            case .Fine:
+                
+                cell.ratingImageView.image = UIImage(named: "icn_average")
+                
+            case .Substandard:
+                
+                cell.ratingImageView.image = UIImage(named: "icn_bad")
+            }
+            
+        } else {
+            cell.ratingImageView.isHidden = true
+        }
+        
         return cell
     }
     
