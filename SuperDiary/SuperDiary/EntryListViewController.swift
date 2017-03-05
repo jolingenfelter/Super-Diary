@@ -21,11 +21,14 @@ class EntryListViewController: UIViewController {
         tableView.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
         return tableView
     }()
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
         navigationBarSetup()
+        searchBarSetup()
         self.title = "Super Diary"
     }
     
@@ -82,3 +85,62 @@ extension EntryListViewController {
         
     }
 }
+
+// MARK: - UISearchBarDelegate
+
+extension EntryListViewController: UISearchControllerDelegate {
+    
+    
+    
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension EntryListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
+}
+
+// MARK: - SearchBar Setup
+
+extension EntryListViewController {
+    
+    func searchBarSetup() {
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        //self.searchController.searchBar.delegate = self
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
