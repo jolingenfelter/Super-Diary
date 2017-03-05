@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class EntryDetailViewController: UIViewController {
     
@@ -47,6 +48,12 @@ class EntryDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.isHidden = true
+        return view
+    }()
+    
     lazy var mediaPickerManager: MediaPickerManager = {
         let manager = MediaPickerManager(presentingViewController: self)
         manager.delegate = self
@@ -77,6 +84,10 @@ class EntryDetailViewController: UIViewController {
     let superButton = UIButton()
     let fineButton = UIButton()
     let substandardButton = UIButton()
+    
+    // Location
+    var locationManager: LocationManager!
+    var location: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,6 +174,15 @@ class EntryDetailViewController: UIViewController {
             locationLabel.heightAnchor.constraint(equalToConstant: 20),
             locationLabel.widthAnchor.constraint(equalToConstant: 200)])
         
+        // ActivityIndicator
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: addLocationButton.centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: locationLabel.topAnchor)
+            ])
+        
         // ImageView
         
         view.addSubview(imageView)
@@ -208,6 +228,27 @@ class EntryDetailViewController: UIViewController {
     // MARK: - Buttons
     
     func addLocation() {
+        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
+        locationManager = LocationManager()
+        locationManager.onLocationFix = { placeMark, error in
+        
+            if let placeMark = placeMark {
+                self.location = placeMark.location
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.locationLabel.isHidden = false
+                
+                guard let name = placeMark.name, let city = placeMark.locality, let area = placeMark.administrativeArea else {
+                    return
+                }
+                
+                self.locationLabel.text = "\(name), \(city), \(area)"
+            }
+            
+        }
         
     }
     

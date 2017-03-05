@@ -38,5 +38,7 @@
 	<string>Photos will only be stored within the app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos will only be stored within the app.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location will only be stored within the app.</string>
 </dict>
 </plist>
