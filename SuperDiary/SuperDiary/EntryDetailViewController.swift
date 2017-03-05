@@ -218,7 +218,7 @@ class EntryDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
             imageView.heightAnchor.constraint(equalToConstant: 200)])
         
         // AddImageButton
@@ -273,6 +273,8 @@ class EntryDetailViewController: UIViewController {
                 }
                 
                 self.locationLabel.text = "\(name), \(city), \(area)"
+                self.addLocationButton.setTitle("Location", for: .normal)
+                self.addLocationButton.isEnabled = false
             }
             
         }
