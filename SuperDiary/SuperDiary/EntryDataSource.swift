@@ -89,6 +89,13 @@ extension EntryDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
+        let entry = self.fetchedResultsController.object(at: indexPath) as! Entry
+        
+        if editingStyle == .delete {
+            CoreDataStack.sharedInstance.managedObjectContext.delete(entry)
+            CoreDataStack.sharedInstance.saveContext()
+        }
+        
     }
     
 }
