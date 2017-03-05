@@ -66,6 +66,8 @@ class EntryDetailViewController: UIViewController {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.lightGray.cgColor
         imageView.layer.borderWidth = 1.5
         return imageView
@@ -94,8 +96,9 @@ class EntryDetailViewController: UIViewController {
         
         if let data = entry?.image {
             let image = UIImage(data: data as Data)
-            self.imageView.image = image
+            imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
+            imageView.layer.borderWidth = 0
         } else {
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
@@ -327,11 +330,13 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
             
             let imageViewSize = self.imageView.frame.size
             let resizedImage = image.resizedImageWithinRect(rectSize: imageViewSize)
+            self.imageView.contentMode = .scaleAspectFit
             
-            print(imageViewSize, resizedImage)
+            self.addImageButton.setTitle("Edit Image", for: .normal)
             
             self.imageView.image = resizedImage
-            self.imageData = UIImageJPEGRepresentation(image, 1.0)
+            self.imageView.layer.borderWidth = 0.0
+            self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
         }
     }
     
