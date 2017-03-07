@@ -72,7 +72,43 @@ class EntryCell: UITableViewCell {
             entryTextLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
             ])
         
+    }
+    
+    func configureCell(forEntry entry: Entry) {
         
+        self.entryDateLabel.text = dateFormatter.string(from: entry.date)
+        self.entryTextLabel.text = entry.note
+        
+        if entry.userImage != nil {
+            self.entryImageView.image = entry.userImage
+        } else {
+            self.entryImageView.image = UIImage(named: "icn_noimage")
+        }
+        
+        if let entryRating = entry.rating {
+            
+            self.ratingImageView.isHidden = false
+            let rating = Rating(rawValue: entryRating)!
+            
+            switch rating {
+                
+            case .Super:
+                
+                self.ratingImageView.image = UIImage(named: "icn_happy")
+                
+            case .Fine:
+                
+                self.ratingImageView.image = UIImage(named: "icn_average")
+                
+            case .Substandard:
+                
+                self.ratingImageView.image = UIImage(named: "icn_bad")
+            }
+            
+        } else {
+            self.ratingImageView.isHidden = true
+        }
+
     }
 
     override func awakeFromNib() {
