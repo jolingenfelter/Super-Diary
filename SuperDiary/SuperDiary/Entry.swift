@@ -49,6 +49,27 @@ class Entry: NSManagedObject {
         }
     }
     
+    class func searchEntry(withText text: String) -> [Entry] {
+        
+        let fetchRequest: NSFetchRequest<Entry> = Entry.allEntriesRequest as! NSFetchRequest<Entry>
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: self.entityName, in: CoreDataStack.sharedInstance.managedObjectContext)
+        
+        let predicate = NSPredicate(format: "note CONTAINS[cd] %@", text)
+        fetchRequest.predicate = predicate
+        
+        var retrievedEntries: [Entry] = []
+        
+        do {
+            
+            retrievedEntries = try CoreDataStack.sharedInstance.managedObjectContext.fetch(fetchRequest)
+            
+        } catch let error {
+            print("Unresolved error: \(error)")
+        }
+        
+        return retrievedEntries
+    }
+    
 }
 
 extension Entry {

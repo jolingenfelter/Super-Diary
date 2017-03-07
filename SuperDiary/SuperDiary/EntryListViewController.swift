@@ -12,7 +12,7 @@ import CoreData
 class EntryListViewController: UIViewController {
     
     lazy var dataSource: EntryDataSource = {
-        return EntryDataSource(fetchRequest: Entry.allEntriesRequest, tableView: self.tableView)
+        return EntryDataSource(fetchRequest: Entry.allEntriesRequest, tableView: self.tableView, searchController: self.searchController)
     }()
     
     lazy var tableView: UITableView = {
@@ -88,19 +88,9 @@ extension EntryListViewController {
 
 // MARK: - UISearchBarDelegate
 
-extension EntryListViewController: UISearchControllerDelegate {
+extension EntryListViewController: UISearchBarDelegate {
     
     
-    
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension EntryListViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
     
 }
 
@@ -109,7 +99,7 @@ extension EntryListViewController: UISearchResultsUpdating {
 extension EntryListViewController {
     
     func searchBarSetup() {
-        searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = dataSource
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         //self.searchController.searchBar.delegate = self

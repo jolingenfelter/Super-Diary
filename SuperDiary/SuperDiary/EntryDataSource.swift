@@ -15,11 +15,15 @@ class EntryDataSource: NSObject {
     private let tableView: UITableView
     private let managedObjectContext = CoreDataStack.sharedInstance.managedObjectContext
     let fetchedResultsController: EntryFetchedResultsController
+    //let entries: [Entry]?
+    let searchController: UISearchController
     
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, tableView: UITableView) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, tableView: UITableView, searchController: UISearchController) {
         
         self.tableView = tableView
         self.fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, tableView: self.tableView)
+        self.searchController = searchController
+        //entries = fetchedResultsController.fetchedObjects as? [Entry]
         
         super.init()
         
@@ -94,6 +98,24 @@ extension EntryDataSource: UITableViewDataSource {
         if editingStyle == .delete {
             CoreDataStack.sharedInstance.managedObjectContext.delete(entry)
             CoreDataStack.sharedInstance.saveContext()
+        }
+        
+    }
+    
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension EntryDataSource: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text {
+            let retrievedEntries = Entry.searchEntry(withText: searchText)
+            
+            for entry in retrievedEntries {
+                print(entry.note! as String)
+            }
         }
         
     }
