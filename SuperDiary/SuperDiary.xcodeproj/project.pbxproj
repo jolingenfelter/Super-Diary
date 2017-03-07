@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9E0FB75F1E6C3A3A00BE75B1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */; };
 		9E478CF41E6B6ED700E75BC6 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */; };
+		9E47A7641E6E45F200BE467D /* SuperDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */; };
 		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
 		9E5602211E67A91F008930D8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5602201E67A91F008930D8 /* Rating.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
@@ -28,9 +29,22 @@
 		9EF5E1051E664F4B00261450 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E1041E664F4B00261450 /* EntryCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9E47A7661E6E45F200BE467D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E80E96D1E63898E006E36BF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E80E9741E63898E006E36BF;
+			remoteInfo = SuperDiary;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
+		9E47A7611E6E45F200BE467D /* SuperDiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperDiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDiaryTests.swift; sourceTree = "<group>"; };
+		9E47A7651E6E45F200BE467D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E56021E1E677259008930D8 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		9E5602201E67A91F008930D8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +67,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9E47A75E1E6E45F200BE467D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E80E9721E63898E006E36BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,10 +84,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E47A7621E6E45F200BE467D /* SuperDiaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */,
+				9E47A7651E6E45F200BE467D /* Info.plist */,
+			);
+			path = SuperDiaryTests;
+			sourceTree = "<group>";
+		};
 		9E80E96C1E63898E006E36BF = {
 			isa = PBXGroup;
 			children = (
 				9E80E9771E63898E006E36BF /* SuperDiary */,
+				9E47A7621E6E45F200BE467D /* SuperDiaryTests */,
 				9E80E9761E63898E006E36BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				9E80E9751E63898E006E36BF /* SuperDiary.app */,
+				9E47A7611E6E45F200BE467D /* SuperDiaryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +173,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9E47A7601E6E45F200BE467D /* SuperDiaryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E47A76A1E6E45F200BE467D /* Build configuration list for PBXNativeTarget "SuperDiaryTests" */;
+			buildPhases = (
+				9E47A75D1E6E45F200BE467D /* Sources */,
+				9E47A75E1E6E45F200BE467D /* Frameworks */,
+				9E47A75F1E6E45F200BE467D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E47A7671E6E45F200BE467D /* PBXTargetDependency */,
+			);
+			name = SuperDiaryTests;
+			productName = SuperDiaryTests;
+			productReference = 9E47A7611E6E45F200BE467D /* SuperDiaryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9E80E9741E63898E006E36BF /* SuperDiary */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E80E98A1E63898E006E36BF /* Build configuration list for PBXNativeTarget "SuperDiary" */;
@@ -168,6 +218,12 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = JoLingenfelter;
 				TargetAttributes = {
+					9E47A7601E6E45F200BE467D = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2K6RX929EU;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E80E9741E63898E006E36BF;
+					};
 					9E80E9741E63898E006E36BF = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 2K6RX929EU;
@@ -189,11 +245,19 @@
 			projectRoot = "";
 			targets = (
 				9E80E9741E63898E006E36BF /* SuperDiary */,
+				9E47A7601E6E45F200BE467D /* SuperDiaryTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9E47A75F1E6E45F200BE467D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E80E9731E63898E006E36BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +270,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9E47A75D1E6E45F200BE467D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E47A7641E6E45F200BE467D /* SuperDiaryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9E80E9711E63898E006E36BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +304,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9E47A7671E6E45F200BE467D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E80E9741E63898E006E36BF /* SuperDiary */;
+			targetProxy = 9E47A7661E6E45F200BE467D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		9E80E9841E63898E006E36BF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -244,6 +324,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9E47A7681E6E45F200BE467D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 2K6RX929EU;
+				INFOPLIST_FILE = SuperDiaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolingenfelter.SuperDiaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperDiary.app/SuperDiary";
+			};
+			name = Debug;
+		};
+		9E47A7691E6E45F200BE467D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 2K6RX929EU;
+				INFOPLIST_FILE = SuperDiaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolingenfelter.SuperDiaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperDiary.app/SuperDiary";
+			};
+			name = Release;
+		};
 		9E80E9881E63898E006E36BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -364,6 +472,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9E47A76A1E6E45F200BE467D /* Build configuration list for PBXNativeTarget "SuperDiaryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E47A7681E6E45F200BE467D /* Debug */,
+				9E47A7691E6E45F200BE467D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9E80E9701E63898E006E36BF /* Build configuration list for PBXProject "SuperDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

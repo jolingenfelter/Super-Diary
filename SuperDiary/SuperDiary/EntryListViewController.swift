@@ -85,14 +85,6 @@ extension EntryListViewController {
     }
 }
 
-// MARK: - UISearchBarDelegate
-
-extension EntryListViewController: UISearchBarDelegate {
-    
-    
-    
-}
-
 // MARK: - SearchBar Setup
 
 extension EntryListViewController {
