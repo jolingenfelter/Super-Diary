@@ -65,7 +65,6 @@ extension EntryListViewController: UITableViewDelegate {
         
         return 100
     }
-    
 }
 
 // MARK: - Navigation

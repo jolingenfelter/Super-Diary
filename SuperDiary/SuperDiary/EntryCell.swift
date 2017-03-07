@@ -19,12 +19,14 @@ class EntryCell: UITableViewCell {
     
     override func layoutSubviews() {
         
+        self.contentView.frame = self.bounds
+        
         // MARK: - ImageView
         
         self.contentView.addSubview(entryImageView)
         entryImageView.roundImage()
         entryImageView.contentMode = .scaleToFill
-        self.entryImageView.translatesAutoresizingMaskIntoConstraints = false
+        entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             entryImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
@@ -38,7 +40,7 @@ class EntryCell: UITableViewCell {
         self.contentView.addSubview(ratingImageView)
         ratingImageView.roundImage()
         ratingImageView.contentMode = .scaleToFill
-        self.ratingImageView.translatesAutoresizingMaskIntoConstraints = false
+        ratingImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             ratingImageView.centerXAnchor.constraint(equalTo: entryImageView.centerXAnchor, constant: 20),
@@ -51,7 +53,7 @@ class EntryCell: UITableViewCell {
         self.contentView.addSubview(entryDateLabel)
         entryDateLabel.textColor = UIColor(colorLiteralRed: 39/255, green: 107/255, blue: 134/255, alpha: 1)
         entryDateLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        self.entryDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        entryDateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             entryDateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
@@ -63,7 +65,7 @@ class EntryCell: UITableViewCell {
         
         self.contentView.addSubview(entryTextLabel)
         entryTextLabel.textColor = UIColor.lightGray
-        self.entryTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        entryTextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             entryTextLabel.topAnchor.constraint(equalTo: entryDateLabel.bottomAnchor, constant: 2),
@@ -76,37 +78,37 @@ class EntryCell: UITableViewCell {
     
     func configureCell(forEntry entry: Entry) {
         
-        self.entryDateLabel.text = dateFormatter.string(from: entry.date)
-        self.entryTextLabel.text = entry.note
+        entryDateLabel.text = dateFormatter.string(from: entry.date)
+        entryTextLabel.text = entry.note
         
         if entry.userImage != nil {
-            self.entryImageView.image = entry.userImage
+            entryImageView.image = entry.userImage
         } else {
-            self.entryImageView.image = UIImage(named: "icn_noimage")
+            entryImageView.image = UIImage(named: "icn_noimage")
         }
         
         if let entryRating = entry.rating {
             
-            self.ratingImageView.isHidden = false
+            ratingImageView.isHidden = false
             let rating = Rating(rawValue: entryRating)!
             
             switch rating {
                 
             case .Super:
                 
-                self.ratingImageView.image = UIImage(named: "icn_happy")
+                ratingImageView.image = UIImage(named: "icn_happy")
                 
             case .Fine:
                 
-                self.ratingImageView.image = UIImage(named: "icn_average")
+                ratingImageView.image = UIImage(named: "icn_average")
                 
             case .Substandard:
                 
-                self.ratingImageView.image = UIImage(named: "icn_bad")
+                ratingImageView.image = UIImage(named: "icn_bad")
             }
             
         } else {
-            self.ratingImageView.isHidden = true
+            ratingImageView.isHidden = true
         }
 
     }
