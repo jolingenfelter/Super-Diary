@@ -47,8 +47,8 @@ class SuperDiaryTests: XCTestCase {
         
         // DataSource
         
-        entryDataSource = EntryDataSource(fetchRequest: Entry.allEntriesRequest, tableView: self.tableView, searchController: searchController)
-        fetchedResultsController = entryDataSource.fetchedResultsController
+        fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: managedObjectContext, tableView: tableView)
+        entryDataSource = EntryDataSource(fetchRequest: Entry.allEntriesRequest, fetchedResultsController: fetchedResultsController, tableView: tableView, searchController: searchController)
         
         createFakeEntry()
         

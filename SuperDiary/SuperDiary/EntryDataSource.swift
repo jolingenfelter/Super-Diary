@@ -18,10 +18,10 @@ class EntryDataSource: NSObject {
     var entries: [Entry]?
     let searchController: UISearchController
     
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, tableView: UITableView, searchController: UISearchController) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, fetchedResultsController: EntryFetchedResultsController, tableView: UITableView, searchController: UISearchController) {
         
         self.tableView = tableView
-        self.fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, tableView: self.tableView)
+        self.fetchedResultsController = fetchedResultsController
         entries = []
         self.searchController = searchController
         
