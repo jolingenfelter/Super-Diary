@@ -25,7 +25,7 @@ class EntryCell: UITableViewCell {
         
         self.contentView.addSubview(entryImageView)
         entryImageView.roundImage()
-        entryImageView.contentMode = .scaleToFill
+        entryImageView.contentMode = .scaleAspectFill
         entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
