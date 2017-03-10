@@ -13,11 +13,6 @@ import CoreLocation
 
 class SuperDiaryTests: XCTestCase {
     
-    var persistentStore: NSPersistentStore!
-    var storeCoordinator: NSPersistentStoreCoordinator!
-    var managedObjectContext: NSManagedObjectContext!
-    var managedObjectModel: NSManagedObjectModel!
-    var entryDataSource: EntryDataSource!
     var tableView = UITableView()
     var searchController = UISearchController()
     var fetchedResultsController: EntryFetchedResultsController!
@@ -28,27 +23,7 @@ class SuperDiaryTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        // CoreDataStack
-        
-        managedObjectModel = NSManagedObjectModel.mergedModel(from: nil)
-        storeCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        
-        do {
-            
-            try persistentStore = storeCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-            managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            managedObjectContext.persistentStoreCoordinator = storeCoordinator
-            
-        } catch let error {
-            print("Unresolved error \(error)")
-        }
-        
-        coreDataStack.managedObjectContext = managedObjectContext
-        
-        // DataSource
-        
-        fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: managedObjectContext, tableView: tableView)
-        entryDataSource = EntryDataSource(fetchRequest: Entry.allEntriesRequest, fetchedResultsController: fetchedResultsController, tableView: tableView, searchController: searchController)
+        fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: coreDataStack.managedObjectContext, tableView: tableView)
         
         createFakeEntry()
         
@@ -56,10 +31,13 @@ class SuperDiaryTests: XCTestCase {
     
     func createFakeEntry() {
         
-        let fakeEntry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: managedObjectContext) as! Entry
+        let fakeEntry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: coreDataStack.managedObjectContext) as! Entry
         fakeEntry.note = "Text Note"
-        fakeEntry.date = NSDate() as Date
-        fakeEntry.location = NSEntityDescription.insertNewObject(forEntityName: Location.entityName, into: managedObjectContext) as? Location
+        fakeEntry.date = Date()
+        let location = NSEntityDescription.insertNewObject(forEntityName: Location.entityName, into: coreDataStack.managedObjectContext) as? Location
+        location?.latitude = 0.0
+        location?.longitude = 0.0
+        fakeEntry.location = location
         fakeEntry.image = UIImageJPEGRepresentation(UIImage(named: "icn_happy")!, 1.0)
         
         coreDataStack.saveContext()
@@ -76,6 +54,16 @@ class SuperDiaryTests: XCTestCase {
         
     }
     
+    func testCreateFakeEntry() {
+        deleteFakeEntry()
+        
+        XCTAssert(self.fetchedResultsController.fetchedObjects?.count == 0, "There is already a note")
+        
+        createFakeEntry()
+        
+        XCTAssert(self.fetchedResultsController.fetchedObjects?.count == 1, "No entry was created successfully")
+    }
+    
     func testDeleteFakeNote() {
         
         // Check note was created
@@ -90,9 +78,11 @@ class SuperDiaryTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         
+        deleteFakeEntry()
         
         super.tearDown()
     }
-    
-    
 }
+    
+    
+
