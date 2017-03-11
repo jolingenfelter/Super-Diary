@@ -10,7 +10,6 @@
 		9E0FB75F1E6C3A3A00BE75B1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */; };
 		9E2D52DE1E7466A20006C209 /* SuperDiaryCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D52DD1E7466A20006C209 /* SuperDiaryCoreDataTests.swift */; };
 		9E478CF41E6B6ED700E75BC6 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */; };
-		9E47A7641E6E45F200BE467D /* SuperDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */; };
 		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
 		9E5602211E67A91F008930D8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5602201E67A91F008930D8 /* Rating.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
@@ -54,8 +53,6 @@
 		9E2D52DF1E7466A20006C209 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		9E47A7611E6E45F200BE467D /* SuperDiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperDiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDiaryTests.swift; sourceTree = "<group>"; };
-		9E47A7651E6E45F200BE467D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E56021E1E677259008930D8 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		9E5602201E67A91F008930D8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,30 +99,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9E2D52DC1E7466A20006C209 /* SuperDiaryCoreDataTests */ = {
+		9E2D52DC1E7466A20006C209 /* SuperDiaryTests */ = {
 			isa = PBXGroup;
 			children = (
 				9E2D52DD1E7466A20006C209 /* SuperDiaryCoreDataTests.swift */,
 				9E2D52DF1E7466A20006C209 /* Info.plist */,
 			);
+			name = SuperDiaryTests;
 			path = SuperDiaryCoreDataTests;
-			sourceTree = "<group>";
-		};
-		9E47A7621E6E45F200BE467D /* SuperDiaryTests */ = {
-			isa = PBXGroup;
-			children = (
-				9E47A7631E6E45F200BE467D /* SuperDiaryTests.swift */,
-				9E47A7651E6E45F200BE467D /* Info.plist */,
-			);
-			path = SuperDiaryTests;
 			sourceTree = "<group>";
 		};
 		9E80E96C1E63898E006E36BF = {
 			isa = PBXGroup;
 			children = (
 				9E80E9771E63898E006E36BF /* SuperDiary */,
-				9E47A7621E6E45F200BE467D /* SuperDiaryTests */,
-				9E2D52DC1E7466A20006C209 /* SuperDiaryCoreDataTests */,
+				9E2D52DC1E7466A20006C209 /* SuperDiaryTests */,
 				9E80E9761E63898E006E36BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -343,7 +331,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E47A7641E6E45F200BE467D /* SuperDiaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

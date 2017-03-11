@@ -90,7 +90,9 @@ class SuperDiaryCoreDataTests: XCTestCase {
     
     let tableView = UITableView()
     lazy var fetchedResultsController: EntryFetchedResultsController = {
-        let fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: testCoreDataStack.sharedInstance.managedObjectContext, tableView: self.tableView)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entry.entityName)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:"date", ascending: true)]
+        let fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: testCoreDataStack.sharedInstance.managedObjectContext, tableView: self.tableView)
         return fetchedResultsController
     }()
     
@@ -113,6 +115,15 @@ class SuperDiaryCoreDataTests: XCTestCase {
         testCoreDataStack.sharedInstance.saveContext()
         
     }
+    
+    func deleteEntry() {
+        
+        if let entry = fetchedResultsController.fetchedObjects?.first {
+            testCoreDataStack.sharedInstance.managedObjectContext.delete(entry as! NSManagedObject)
+            testCoreDataStack.sharedInstance.saveContext()
+        }
+        
+    }
 
     override func setUp() {
         super.setUp()
@@ -130,13 +141,55 @@ class SuperDiaryCoreDataTests: XCTestCase {
         
         fetchedResultsController.executeFetch()
         
+        // Check that there are no entries
         XCTAssert(fetchedResultsController.fetchedObjects?.count == 0, "There is an existing note saved in Core Data")
         
         createFakeEntry()
         
         fetchedResultsController.executeFetch()
         
+        // Check to see if entry was added
         XCTAssert(fetchedResultsController.fetchedObjects?.count == 1, "Entry was NOT saved")
+        
+        deleteEntry()
+        
+    }
+    
+    func testDeleteEntry() {
+        
+        // Add entry and check to make sure it is saved
+        createFakeEntry()
+        
+        fetchedResultsController.executeFetch()
+        
+        XCTAssert(fetchedResultsController.fetchedObjects?.count == 1, "There are no saved entries")
+        
+        // Delete entry and recheck to make sure it was deleted
+        deleteEntry()
+        
+        fetchedResultsController.executeFetch()
+        
+        XCTAssert(fetchedResultsController.fetchedObjects?.count == 0, "Note was not successfully deleted")
+        
+        
+    }
+    
+    func testUpdateNote() {
+        
+        // Add entry and check to make sure it was added
+        createFakeEntry()
+        
+        XCTAssert(fetchedResultsController.fetchedObjects?.count == 1, "There are no saved entries")
+        
+        let entry = fetchedResultsController.fetchedObjects?.first as! Entry
+        entry.note = "Updated test entry"
+        
+        // Save updated note
+        testCoreDataStack.sharedInstance.saveContext()
+        
+        // Check if note was updated
+        fetchedResultsController.executeFetch()
+        XCTAssert(entry.note == "Updated test entry", "Entry was not successfully updated")
         
     }
     
