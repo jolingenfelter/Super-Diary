@@ -70,6 +70,17 @@ class EntryDetailViewController: UIViewController {
         return button
     }()
     
+    lazy var deleteImageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
+        
+        return button
+
+    }()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -116,7 +127,9 @@ class EntryDetailViewController: UIViewController {
             imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
             imageView.layer.borderWidth = 0
+            deleteImageButton.isHidden = false
         } else {
+            deleteImageButton.isHidden = true
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
         }
@@ -160,7 +173,7 @@ class EntryDetailViewController: UIViewController {
         }
     
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -231,6 +244,15 @@ class EntryDetailViewController: UIViewController {
             addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             ])
         
+        // DeleteImageButton
+        view.addSubview(deleteImageButton)
+        deleteImageButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            deleteImageButton.topAnchor.constraint(equalTo: addImageButton.topAnchor),
+            deleteImageButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor)
+            ])
+        
         // RatingButtonBar
         
         let buttonsArray = [substandardButton, fineButton, superButton]
@@ -253,6 +275,7 @@ class EntryDetailViewController: UIViewController {
     }
     
     // MARK: - Buttons
+    
     // Add Location
     
     func addLocation() {
@@ -302,6 +325,19 @@ class EntryDetailViewController: UIViewController {
         actionSheet.addAction(cancelAction)
         
         self.present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
+    // DeleteImage
+    
+    func deleteImage() {
+        
+        entry?.image = nil
+        imageData = nil
+        imageView.image = UIImage(named: "icn_noImage")
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        coreDataStack.saveContext()
+        deleteImageButton.isHidden = true
         
     }
     
@@ -441,6 +477,7 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
             self.imageView.image = resizedImage
             self.imageView.layer.borderWidth = 0.0
             self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
+            self.deleteImageButton.isHidden = false
         }
     }
     
