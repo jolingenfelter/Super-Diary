@@ -94,7 +94,6 @@ extension EntryListViewController {
         searchController.searchResultsUpdater = dataSource
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        //self.searchController.searchBar.delegate = self
         tableView.tableHeaderView = searchController.searchBar
     }
     

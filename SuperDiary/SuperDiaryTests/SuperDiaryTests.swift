@@ -15,24 +15,60 @@ class SuperDiaryTests: XCTestCase {
     
     var tableView = UITableView()
     var searchController = UISearchController()
-    var fetchedResultsController: EntryFetchedResultsController!
     
     let coreDataStack = CoreDataStack.sharedInstance
+    
+    lazy var managedObjectModel: NSManagedObjectModel = {
+        
+        let model = NSManagedObjectModel.mergedModel(from: nil)
+        return model!
+        
+    }()
+    
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+        
+        let storeCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        
+        do {
+            
+            try storeCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+            
+        } catch let error {
+            print("Unresolved error: \(error)")
+        }
+        
+        return storeCoordinator
+        
+    }()
+    
+    lazy var managedObjectContext: NSManagedObjectContext = {
+        
+        var context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = self.persistentStoreCoordinator
+        return context
+        
+    }()
+    
+    lazy var fetchedResultsController: EntryFetchedResultsController = {
+        
+        let fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: self.managedObjectContext, tableView: self.tableView)
+        return fetchedResultsController
+        
+    }()
+    
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: coreDataStack.managedObjectContext, tableView: tableView)
-        
-        createFakeEntry()
+        coreDataStack.managedObjectContext = self.managedObjectContext
         
     }
     
     func createFakeEntry() {
         
         let fakeEntry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: coreDataStack.managedObjectContext) as! Entry
-        fakeEntry.note = "Text Note"
+        fakeEntry.note = "Test Note"
         fakeEntry.date = Date()
         let location = NSEntityDescription.insertNewObject(forEntityName: Location.entityName, into: coreDataStack.managedObjectContext) as? Location
         location?.latitude = 0.0
@@ -55,18 +91,20 @@ class SuperDiaryTests: XCTestCase {
     }
     
     func testCreateFakeEntry() {
-        deleteFakeEntry()
         
         XCTAssert(self.fetchedResultsController.fetchedObjects?.count == 0, "There is already a note")
         
         createFakeEntry()
         
         XCTAssert(self.fetchedResultsController.fetchedObjects?.count == 1, "No entry was created successfully")
+        
+        deleteFakeEntry()
     }
     
     func testDeleteFakeNote() {
         
-        // Check note was created
+        createFakeEntry()
+        
         XCTAssert(self.fetchedResultsController.fetchedObjects?.count == 1, "Note was NOT created successfully")
         
         deleteFakeEntry()
