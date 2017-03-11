@@ -15,14 +15,14 @@ class EntryDataSource: NSObject {
     let tableView: UITableView
     private let managedObjectContext = CoreDataStack.sharedInstance.managedObjectContext
     let fetchedResultsController: EntryFetchedResultsController
-    var entries: [Entry]?
+    var retrievedEntries: [Entry]?
     let searchController: UISearchController
     
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, tableView: UITableView, searchController: UISearchController) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, fetchedResultsController: EntryFetchedResultsController, tableView: UITableView, searchController: UISearchController) {
         
         self.tableView = tableView
-        self.fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, tableView: self.tableView)
-        entries = []
+        self.fetchedResultsController = fetchedResultsController
+        retrievedEntries = []
         self.searchController = searchController
         
         super.init()
@@ -44,10 +44,9 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return fetchedResultsController.fetchedObjects?.count ?? 0
         
         if searchController.isActive {
-            return entries?.count ?? 0
+            return retrievedEntries?.count ?? 0
         } else {
             return fetchedResultsController.fetchedObjects?.count ?? 0
         }
@@ -59,7 +58,7 @@ extension EntryDataSource: UITableViewDataSource {
         
         if searchController.isActive {
             
-            if let entries = entries {
+            if let entries = retrievedEntries {
                 let entry = entries[indexPath.row]
                 cell.configureCell(forEntry: entry)
             }
@@ -104,7 +103,7 @@ extension EntryDataSource: UISearchResultsUpdating {
         
         if let searchText = searchController.searchBar.text {
             let retrievedEntries = Entry.searchEntry(withText: searchText)
-            self.entries = retrievedEntries
+            self.retrievedEntries = retrievedEntries
         }
         self.tableView.reloadData()
     }

@@ -70,6 +70,17 @@ class EntryDetailViewController: UIViewController {
         return button
     }()
     
+    lazy var deleteImageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
+        
+        return button
+
+    }()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -116,7 +127,9 @@ class EntryDetailViewController: UIViewController {
             imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
             imageView.layer.borderWidth = 0
+            deleteImageButton.isHidden = false
         } else {
+            deleteImageButton.isHidden = true
             imageView.contentMode = .center
             imageView.image = UIImage(named: "icn_noimage")
         }
@@ -160,7 +173,7 @@ class EntryDetailViewController: UIViewController {
         }
     
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -231,6 +244,15 @@ class EntryDetailViewController: UIViewController {
             addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             ])
         
+        // DeleteImageButton
+        view.addSubview(deleteImageButton)
+        deleteImageButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            deleteImageButton.topAnchor.constraint(equalTo: addImageButton.topAnchor),
+            deleteImageButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor)
+            ])
+        
         // RatingButtonBar
         
         let buttonsArray = [substandardButton, fineButton, superButton]
@@ -253,6 +275,7 @@ class EntryDetailViewController: UIViewController {
     }
     
     // MARK: - Buttons
+    
     // Add Location
     
     func addLocation() {
@@ -305,6 +328,30 @@ class EntryDetailViewController: UIViewController {
         
     }
     
+    // DeleteImage
+    
+    func deleteImage() {
+        
+        let alert = UIAlertController(title: "Are you sure you want to delete this image?", message: "This action cannot be undone", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            
+            self.entry?.image = nil
+            self.imageData = nil
+            self.imageView.image = UIImage(named: "icn_noImage")
+            self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+            self.coreDataStack.saveContext()
+            self.deleteImageButton.isHidden = true
+            
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 
 // MARK: - Navigation
@@ -327,28 +374,36 @@ extension EntryDetailViewController {
     
     func savePressed() {
         
-        if let entry = self.entry {
+        if noteTextView.text == "" || selectedRating == nil {
             
-            entry.note = noteTextView.text
-            entry.rating = selectedRating?.rawValue
-            entry.image = imageData
-            
-            if let location = location {
-                
-                let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                
-                entry.location = locationToSave
-                
-            }
-            
-            coreDataStack.saveContext()
+            self.presentAlert(withTitle: "Oops!", andMessage: "Entries require some text and a mood")
             
         } else {
-            Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
-            coreDataStack.saveContext()
+            
+            if let entry = self.entry {
+                
+                entry.note = noteTextView.text
+                entry.rating = selectedRating?.rawValue
+                entry.image = imageData
+                
+                if let location = location {
+                    
+                    let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    
+                    entry.location = locationToSave
+                    
+                }
+                
+                coreDataStack.saveContext()
+                
+            } else {
+                Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
+                coreDataStack.saveContext()
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            
         }
-        
-        self.dismiss(animated: true, completion: nil)
         
     }
     
@@ -441,6 +496,7 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
             self.imageView.image = resizedImage
             self.imageView.layer.borderWidth = 0.0
             self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
+            self.deleteImageButton.isHidden = false
         }
     }
     

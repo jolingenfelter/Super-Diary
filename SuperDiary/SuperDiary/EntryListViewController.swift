@@ -12,7 +12,8 @@ import CoreData
 class EntryListViewController: UIViewController {
     
     lazy var dataSource: EntryDataSource = {
-        return EntryDataSource(fetchRequest: Entry.allEntriesRequest, tableView: self.tableView, searchController: self.searchController)
+        let fetchedResultsController = EntryFetchedResultsController(fetchRequest: Entry.allEntriesRequest, managedObjectContext: CoreDataStack.sharedInstance.managedObjectContext, tableView: self.tableView)
+        return EntryDataSource(fetchRequest: Entry.allEntriesRequest, fetchedResultsController: fetchedResultsController, tableView: self.tableView, searchController: self.searchController)
     }()
     
     lazy var tableView: UITableView = {
@@ -85,14 +86,6 @@ extension EntryListViewController {
     }
 }
 
-// MARK: - UISearchBarDelegate
-
-extension EntryListViewController: UISearchBarDelegate {
-    
-    
-    
-}
-
 // MARK: - SearchBar Setup
 
 extension EntryListViewController {
@@ -101,7 +94,6 @@ extension EntryListViewController {
         searchController.searchResultsUpdater = dataSource
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        //self.searchController.searchBar.delegate = self
         tableView.tableHeaderView = searchController.searchBar
     }
     
