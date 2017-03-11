@@ -24,7 +24,6 @@ class EntryCell: UITableViewCell {
         // MARK: - ImageView
         
         self.contentView.addSubview(entryImageView)
-        entryImageView.roundImage()
         entryImageView.contentMode = .scaleAspectFill
         entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,9 +81,21 @@ class EntryCell: UITableViewCell {
         entryTextLabel.text = entry.note
         
         if entry.userImage != nil {
-            entryImageView.image = entry.userImage
+            
+            DispatchQueue.main.async {
+                
+                self.entryImageView.roundImage()
+                self.entryImageView.image = entry.userImage
+            }
+            
         } else {
-            entryImageView.image = UIImage(named: "icn_noimage")
+            
+            DispatchQueue.main.async {
+                
+                self.entryImageView.roundImage()
+                self.entryImageView.image = UIImage(named: "icn_noimage")
+            }
+
         }
         
         if let entryRating = entry.rating {
