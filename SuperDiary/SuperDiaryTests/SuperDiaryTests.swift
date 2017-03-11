@@ -56,6 +56,7 @@ class SuperDiaryTests: XCTestCase {
         
     }()
     
+
     
     override func setUp() {
         super.setUp()

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:SuperDiary.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9E2D52DA1E7466A20006C209"
+               BuildableName = "SuperDiaryCoreDataTests.xctest"
+               BlueprintName = "SuperDiaryCoreDataTests"
+               ReferencedContainer = "container:SuperDiary.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
