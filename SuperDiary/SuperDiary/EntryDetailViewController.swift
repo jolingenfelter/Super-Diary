@@ -363,28 +363,36 @@ extension EntryDetailViewController {
     
     func savePressed() {
         
-        if let entry = self.entry {
+        if noteTextView.text == "" || selectedRating == nil {
             
-            entry.note = noteTextView.text
-            entry.rating = selectedRating?.rawValue
-            entry.image = imageData
-            
-            if let location = location {
-                
-                let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                
-                entry.location = locationToSave
-                
-            }
-            
-            coreDataStack.saveContext()
+            self.presentAlert(withTitle: "Oops!", andMessage: "Entries require some text and a mood")
             
         } else {
-            Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
-            coreDataStack.saveContext()
+            
+            if let entry = self.entry {
+                
+                entry.note = noteTextView.text
+                entry.rating = selectedRating?.rawValue
+                entry.image = imageData
+                
+                if let location = location {
+                    
+                    let locationToSave = Location.location(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    
+                    entry.location = locationToSave
+                    
+                }
+                
+                coreDataStack.saveContext()
+                
+            } else {
+                Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
+                coreDataStack.saveContext()
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            
         }
-        
-        self.dismiss(animated: true, completion: nil)
         
     }
     
