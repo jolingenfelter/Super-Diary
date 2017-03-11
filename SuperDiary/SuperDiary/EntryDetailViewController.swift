@@ -332,12 +332,23 @@ class EntryDetailViewController: UIViewController {
     
     func deleteImage() {
         
-        entry?.image = nil
-        imageData = nil
-        imageView.image = UIImage(named: "icn_noImage")
-        imageView.layer.borderColor = UIColor.lightGray.cgColor
-        coreDataStack.saveContext()
-        deleteImageButton.isHidden = true
+        let alert = UIAlertController(title: "Are you sure you want to delete this image?", message: "This action cannot be undone", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            
+            self.entry?.image = nil
+            self.imageData = nil
+            self.imageView.image = UIImage(named: "icn_noImage")
+            self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+            self.coreDataStack.saveContext()
+            self.deleteImageButton.isHidden = true
+            
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
