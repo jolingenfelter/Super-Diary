@@ -1,8 +1,8 @@
 //
-//  SuperDiaryCoreDataTests.swift
-//  SuperDiaryCoreDataTests
+//  Super_DiaryTests.swift
+//  Super_DiaryTests
 //
-//  Created by Joanna Lingenfelter on 3/11/17.
+//  Created by Joanna Lingenfelter on 3/12/17.
 //  Copyright © 2017 JoLingenfelter. All rights reserved.
 //
 
@@ -77,7 +77,7 @@ class SuperDiaryCoreDataTests: XCTestCase {
         }
     }
     
-    // MARK : - FetchedResultsController 
+    // MARK : - FetchedResultsController
     
     let tableView = UITableView()
     lazy var fetchedResultsController: EntryFetchedResultsController = {
@@ -115,7 +115,7 @@ class SuperDiaryCoreDataTests: XCTestCase {
         }
         
     }
-
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -180,3 +180,4 @@ class SuperDiaryCoreDataTests: XCTestCase {
     }
     
 }
+
