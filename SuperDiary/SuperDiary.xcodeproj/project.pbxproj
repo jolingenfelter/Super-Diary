@@ -501,6 +501,7 @@
 				9EEE934E1E7581BA00ACBAEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
