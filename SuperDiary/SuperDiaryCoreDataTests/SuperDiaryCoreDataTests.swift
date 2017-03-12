@@ -18,15 +18,6 @@ class SuperDiaryCoreDataTests: XCTestCase {
         
         static let sharedInstance = testCoreDataStack()
         
-        lazy var applicationDocumentsDirectory: NSURL = {
-            
-            // The directory the application uses to store the Core Data store file. This code uses a directory named "com.teamtreehouse.FaceSnapPrototype" in the application's documents Application Support directory.
-            
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return urls[urls.count-1] as NSURL
-            
-        }()
-        
         lazy var managedObjectModel: NSManagedObjectModel = {
             
             // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -160,14 +151,10 @@ class SuperDiaryCoreDataTests: XCTestCase {
         // Add entry and check to make sure it is saved
         createFakeEntry()
         
-        fetchedResultsController.executeFetch()
-        
         XCTAssert(fetchedResultsController.fetchedObjects?.count == 1, "There are no saved entries")
         
         // Delete entry and recheck to make sure it was deleted
         deleteEntry()
-        
-        fetchedResultsController.executeFetch()
         
         XCTAssert(fetchedResultsController.fetchedObjects?.count == 0, "Note was not successfully deleted")
         
@@ -188,7 +175,6 @@ class SuperDiaryCoreDataTests: XCTestCase {
         testCoreDataStack.sharedInstance.saveContext()
         
         // Check if note was updated
-        fetchedResultsController.executeFetch()
         XCTAssert(entry.note == "Updated test entry", "Entry was not successfully updated")
         
     }
