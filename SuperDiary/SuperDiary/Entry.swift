@@ -35,10 +35,12 @@ class Entry: NSManagedObject {
         return entry
     }
     
-    class func entry(withNote note: String?, image: Data?, rating: String?, and location: CLLocation?) {
+    class func entry(withNote note: String?, image: Data?, rating: String?, and location: CLLocation?) -> Entry {
         
         let entry = Entry.entry(withNote: note, Image: image, andRating: rating)
         entry.addLocation(location: location)
+        
+        return entry
         
     }
     
