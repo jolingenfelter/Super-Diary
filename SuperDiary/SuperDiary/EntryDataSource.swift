@@ -13,7 +13,6 @@ import CoreData
 class EntryDataSource: NSObject {
     
     let tableView: UITableView
-    private let managedObjectContext = CoreDataStack.sharedInstance.managedObjectContext
     let fetchedResultsController: EntryFetchedResultsController
     var retrievedEntries: [Entry]?
     let searchController: UISearchController
