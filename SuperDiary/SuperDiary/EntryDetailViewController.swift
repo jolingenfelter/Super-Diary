@@ -397,7 +397,7 @@ extension EntryDetailViewController {
                 coreDataStack.saveContext()
                 
             } else {
-                Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
+                entry = Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
                 coreDataStack.saveContext()
             }
             
