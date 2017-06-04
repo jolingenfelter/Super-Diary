@@ -22,7 +22,6 @@
 		9ED6CD771E6454F1000405AE /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CD761E6454F1000405AE /* Entry.swift */; };
 		9EDF47FB1E68D41100E7D2EB /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */; };
 		9EDF47FD1E68D63900E7D2EB /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */; };
-		9EDF47FF1E68F14000E7D2EB /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF47FE1E68F14000E7D2EB /* Alert.swift */; };
 		9EEE93481E7581BA00ACBAEC /* Super_DiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE93471E7581BA00ACBAEC /* Super_DiaryTests.swift */; };
 		9EF5E0FE1E64E98100261450 /* EntryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E0FD1E64E98100261450 /* EntryListViewController.swift */; };
 		9EF5E1001E66473200261450 /* EntryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5E0FF1E66473200261450 /* EntryDataSource.swift */; };
@@ -58,7 +57,6 @@
 		9ED6CD761E6454F1000405AE /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		9EDF47FE1E68F14000E7D2EB /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		9EEE93451E7581BA00ACBAEC /* Super_DiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Super_DiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EEE93471E7581BA00ACBAEC /* Super_DiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Super_DiaryTests.swift; sourceTree = "<group>"; };
 		9EEE93491E7581BA00ACBAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			children = (
 				9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */,
 				9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */,
-				9EDF47FE1E68F14000E7D2EB /* Alert.swift */,
 				9ED5A4C71E6B3BEE003C0CBD /* MediaPickerManager.swift */,
 				9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */,
 				9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */,
@@ -286,7 +283,6 @@
 				9ED6CD751E6454D9000405AE /* Location.swift in Sources */,
 				9EDF47FD1E68D63900E7D2EB /* DateFormatter.swift in Sources */,
 				9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */,
-				9EDF47FF1E68F14000E7D2EB /* Alert.swift in Sources */,
 				9ED5A4C81E6B3BEE003C0CBD /* MediaPickerManager.swift in Sources */,
 				9EF5E1001E66473200261450 /* EntryDataSource.swift in Sources */,
 				9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */,
