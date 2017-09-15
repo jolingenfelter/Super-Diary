@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E0FB75F1E6C3A3A00BE75B1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */; };
 		9E2D52E61E74AE1A0006C209 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D52E51E74AE1A0006C209 /* ViewControllerExtension.swift */; };
-		9E478CF41E6B6ED700E75BC6 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */; };
 		9E56021F1E677259008930D8 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E56021E1E677259008930D8 /* EntryDetailViewController.swift */; };
 		9E5602211E67A91F008930D8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5602201E67A91F008930D8 /* Rating.swift */; };
 		9E80E9791E63898E006E36BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80E9781E63898E006E36BF /* AppDelegate.swift */; };
@@ -42,7 +41,6 @@
 /* Begin PBXFileReference section */
 		9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		9E2D52E51E74AE1A0006C209 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
-		9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		9E56021E1E677259008930D8 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		9E5602201E67A91F008930D8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		9E80E9751E63898E006E36BF /* SuperDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +144,6 @@
 				9EDF47FA1E68D41100E7D2EB /* RoundImageView.swift */,
 				9EDF47FC1E68D63900E7D2EB /* DateFormatter.swift */,
 				9ED5A4C71E6B3BEE003C0CBD /* MediaPickerManager.swift */,
-				9E478CF31E6B6ED700E75BC6 /* ResizeImage.swift */,
 				9E0FB75E1E6C3A3A00BE75B1 /* LocationManager.swift */,
 				9E2D52E51E74AE1A0006C209 /* ViewControllerExtension.swift */,
 			);
@@ -277,7 +274,6 @@
 				9E5602211E67A91F008930D8 /* Rating.swift in Sources */,
 				9E0FB75F1E6C3A3A00BE75B1 /* LocationManager.swift in Sources */,
 				9E2D52E61E74AE1A0006C209 /* ViewControllerExtension.swift in Sources */,
-				9E478CF41E6B6ED700E75BC6 /* ResizeImage.swift in Sources */,
 				9ED6CD771E6454F1000405AE /* Entry.swift in Sources */,
 				9E80E9811E63898E006E36BF /* SuperDiary.xcdatamodeld in Sources */,
 				9ED6CD751E6454D9000405AE /* Location.swift in Sources */,

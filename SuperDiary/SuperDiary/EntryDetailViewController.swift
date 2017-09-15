@@ -181,6 +181,8 @@ class EntryDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         
+        super.viewDidLayoutSubviews()
+        
         // TextView
         
         view.addSubview(noteTextView)
@@ -486,16 +488,12 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         manager.dismissImagePickerController(animated: true) {
-            
-            let imageViewSize = self.imageView.frame.size
-            let resizedImage = image.resizedImageWithinRect(rectSize: imageViewSize)
             self.imageView.contentMode = .scaleAspectFit
-            
             self.addImageButton.setTitle("Edit Image", for: .normal)
-            
-            self.imageView.image = resizedImage
+            self.imageView.clipsToBounds = true
+            self.imageView.image = image
             self.imageView.layer.borderWidth = 0.0
-            self.imageData = UIImageJPEGRepresentation(resizedImage, 1.0)
+            self.imageData = UIImageJPEGRepresentation(image, 1.0)
             self.deleteImageButton.isHidden = false
         }
     }
