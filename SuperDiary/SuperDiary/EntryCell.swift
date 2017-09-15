@@ -105,15 +105,15 @@ class EntryCell: UITableViewCell {
             
             switch rating {
                 
-            case .Super:
+            case .spectacular:
                 
                 ratingImageView.image = UIImage(named: "icn_happy")
                 
-            case .Fine:
+            case .fine:
                 
                 ratingImageView.image = UIImage(named: "icn_average")
                 
-            case .Substandard:
+            case .substandard:
                 
                 ratingImageView.image = UIImage(named: "icn_bad")
             }

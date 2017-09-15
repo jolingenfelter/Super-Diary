@@ -92,7 +92,7 @@ class EntryDetailViewController: UIViewController {
     }()
     
     // Rating Buttons
-    let superButton = UIButton()
+    let spectacularButton = UIButton()
     let fineButton = UIButton()
     let substandardButton = UIButton()
     
@@ -138,7 +138,7 @@ class EntryDetailViewController: UIViewController {
             let savedRating = Rating(rawValue: rating)
             setRating(rating: savedRating!)
         } else {
-            self.superButton.alpha = 0.5
+            self.spectacularButton.alpha = 0.5
             self.fineButton.alpha = 0.5
             self.substandardButton.alpha = 0.5
         }
@@ -257,7 +257,7 @@ class EntryDetailViewController: UIViewController {
         
         // RatingButtonBar
         
-        let buttonsArray = [substandardButton, fineButton, superButton]
+        let buttonsArray = [substandardButton, fineButton, spectacularButton]
         
         let ratingButtonBar = UIStackView(arrangedSubviews: buttonsArray)
         ratingButtonBar.axis = .horizontal
@@ -417,10 +417,10 @@ extension EntryDetailViewController {
     
     func setupRatingButtons() {
         
-        superButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
-        superButton.imageView?.contentMode = .center
-        superButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
-        superButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
+        spectacularButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
+        spectacularButton.imageView?.contentMode = .center
+        spectacularButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        spectacularButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
         
         fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
         fineButton.imageView?.contentMode = .center
@@ -437,47 +437,41 @@ extension EntryDetailViewController {
     
     func setRating(rating: Rating) {
         
-        self.superButton.alpha = 0.5
+        self.spectacularButton.alpha = 0.5
         self.fineButton.alpha = 0.5
         self.substandardButton.alpha = 0.5
         
         switch rating {
             
-        case .Super:
+        case .spectacular:
             
-            selectedRating = Rating.Super
-            superButton.alpha = 1.0
-            
-            break
+            selectedRating = Rating.spectacular
+            spectacularButton.alpha = 1.0
         
-        case .Fine:
+        case .fine:
             
-            selectedRating = Rating.Fine
+            selectedRating = Rating.fine
             fineButton.alpha = 1.0
-            
-            break
         
-        case .Substandard:
+        case .substandard:
             
-            selectedRating = Rating.Substandard
+            selectedRating = Rating.substandard
             substandardButton.alpha = 1.0
-            
-            break
             
         }
         
     }
     
     func superSelected() {
-        setRating(rating: Rating.Super)
+        setRating(rating: Rating.spectacular)
     }
     
     func fineSelected() {
-        setRating(rating: Rating.Fine)
+        setRating(rating: Rating.fine)
     }
     
     func substandardSelected() {
-        setRating(rating: Rating.Substandard)
+        setRating(rating: Rating.substandard)
     }
     
 }

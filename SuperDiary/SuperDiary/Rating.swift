@@ -10,8 +10,8 @@ import Foundation
 
 enum Rating: String {
     
-    case Super
-    case Fine
-    case Substandard
+    case spectacular
+    case fine
+    case substandard
     
 }
