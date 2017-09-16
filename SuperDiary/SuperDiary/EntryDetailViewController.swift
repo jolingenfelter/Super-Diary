@@ -18,7 +18,7 @@ class EntryDetailViewController: UIViewController {
     
     // Views
     
-    lazy var noteTextView: UITextView = {
+    lazy var entryTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1.5
@@ -27,7 +27,7 @@ class EntryDetailViewController: UIViewController {
         return textView
     }()
     
-    lazy var addLocationButton: UIButton = {
+    lazy var entryAddLocationButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add location", for: .normal)
         button.setTitleColor(.lightGray , for: .normal)
@@ -40,7 +40,7 @@ class EntryDetailViewController: UIViewController {
         return button
     }()
     
-    lazy var locationLabel: UILabel = {
+    lazy var entryLocationLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.lightGray
         label.adjustsFontSizeToFitWidth = true
@@ -60,7 +60,7 @@ class EntryDetailViewController: UIViewController {
         return manager
     }()
     
-    lazy var addImageButton: UIButton = {
+    lazy var entryAddImageButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add image", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
@@ -70,7 +70,7 @@ class EntryDetailViewController: UIViewController {
         return button
     }()
     
-    lazy var deleteImageButton: UIButton = {
+    lazy var entryDeleteImageButton: UIButton = {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
@@ -81,7 +81,7 @@ class EntryDetailViewController: UIViewController {
 
     }()
     
-    lazy var imageView: UIImageView = {
+    lazy var entryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -92,13 +92,17 @@ class EntryDetailViewController: UIViewController {
     }()
     
     // Rating Buttons
-    var spectacularButton = UIButton()
-    var fineButton = UIButton()
-    var substandardButton = UIButton()
+    var entrySpectacularButton = UIButton()
+    var entryFineButton = UIButton()
+    var entrySubstandardButton = UIButton()
     
     // Location
     var locationManager: LocationManager!
     var location: CLLocation?
+    
+    lazy var entryViewModel: EntryDetailViewModel = {
+        return EntryDetailViewModel(entry: self.entry)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,70 +111,7 @@ class EntryDetailViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
         
-        
-        configureView(withEntry: entry)
-    }
-    
-    fileprivate func configureView(withEntry entry: Entry?) {
-        
-        noteTextView.text = entry?.note
-        
-        if let date = entry?.date {
-            self.title = dateFormatter.string(from: date)
-        } else {
-            self.title = dateFormatter.string(from: Date())
-        }
-        
-        if let data = entry?.image {
-            imageData = entry?.image
-            let image = UIImage(data: data as Data)
-            imageView.image = image
-            addImageButton.setTitle("Edit Image", for: .normal)
-            deleteImageButton.isHidden = false
-        } else {
-            deleteImageButton.isHidden = true
-            imageView.contentMode = .center
-            imageView.image = UIImage(named: "icn_noimage")
-        }
-        
-        if let rating = entry?.rating {
-            let savedRating = Rating(rawValue: rating)
-            setRating(rating: savedRating!)
-        } else {
-            self.spectacularButton.alpha = 0.5
-            self.fineButton.alpha = 0.5
-            self.substandardButton.alpha = 0.5
-        }
-        
-        if let location = entry?.location {
-            
-            addLocationButton.setTitle("Location", for: .normal)
-            addLocationButton.isEnabled = false
-            
-            locationManager = LocationManager()
-            
-            let latitude = location.latitude
-            let longitude = location.longitude
-            
-            let locationPoint = CLLocation(latitude: latitude, longitude: longitude)
-            self.location = locationPoint
-            
-            locationManager.getPlacemark(forLocation: locationPoint) { placemark, error in
-                
-                if let error = error {
-                    print(error)
-                } else if let placemark = placemark {
-                    
-                    guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
-                    
-                    self.locationLabel.text = "\(name), \(city), \(area)"
-                }
-
-                
-            }
-            
-        }
-    
+        entryViewModel.configureView(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -184,79 +125,79 @@ class EntryDetailViewController: UIViewController {
         
         // TextView
         
-        view.addSubview(noteTextView)
-        noteTextView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryTextView)
+        entryTextView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            noteTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            noteTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            noteTextView.topAnchor.constraint(equalTo: (navigationController?.navigationBar.bottomAnchor)!, constant: 20),
-            noteTextView.heightAnchor.constraint(equalToConstant: 200)])
+            entryTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            entryTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            entryTextView.topAnchor.constraint(equalTo: (navigationController?.navigationBar.bottomAnchor)!, constant: 20),
+            entryTextView.heightAnchor.constraint(equalToConstant: 200)])
         
         // AddLocationButton
         
-        view.addSubview(addLocationButton)
-        addLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryAddLocationButton)
+        entryAddLocationButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addLocationButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 10),
-            addLocationButton.leadingAnchor.constraint(equalTo: noteTextView.leadingAnchor),
-            addLocationButton.heightAnchor.constraint(equalToConstant: 35),
-            addLocationButton.widthAnchor.constraint(equalToConstant: 150)])
+            entryAddLocationButton.topAnchor.constraint(equalTo: entryTextView.bottomAnchor, constant: 10),
+            entryAddLocationButton.leadingAnchor.constraint(equalTo: entryTextView.leadingAnchor),
+            entryAddLocationButton.heightAnchor.constraint(equalToConstant: 35),
+            entryAddLocationButton.widthAnchor.constraint(equalToConstant: 150)])
         
         // LocationLabel
         
-        view.addSubview(locationLabel)
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryLocationLabel)
+        entryLocationLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            locationLabel.leadingAnchor.constraint(equalTo: addLocationButton.leadingAnchor),
-            locationLabel.topAnchor.constraint(equalTo: addLocationButton.bottomAnchor, constant: 5),
-            locationLabel.heightAnchor.constraint(equalToConstant: 20),
-            locationLabel.widthAnchor.constraint(equalToConstant: 200)])
+            entryLocationLabel.leadingAnchor.constraint(equalTo: entryAddLocationButton.leadingAnchor),
+            entryLocationLabel.topAnchor.constraint(equalTo: entryAddLocationButton.bottomAnchor, constant: 5),
+            entryLocationLabel.heightAnchor.constraint(equalToConstant: 20),
+            entryLocationLabel.widthAnchor.constraint(equalToConstant: 200)])
         
         // ActivityIndicator
         view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: addLocationButton.centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: locationLabel.topAnchor)
+            activityIndicator.centerXAnchor.constraint(equalTo: entryAddLocationButton.centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: entryLocationLabel.topAnchor)
             ])
         
         // ImageView
         
-        view.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryImageView)
+        entryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
-            imageView.heightAnchor.constraint(equalToConstant: 200)])
+            entryImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            entryImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            entryImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            entryImageView.heightAnchor.constraint(equalToConstant: 200)])
         
         // AddImageButton
         
-        view.addSubview(addImageButton)
-        addImageButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryAddImageButton)
+        entryAddImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addImageButton.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -5),
-            addImageButton.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            entryAddImageButton.bottomAnchor.constraint(equalTo: entryImageView.topAnchor, constant: -5),
+            entryAddImageButton.leadingAnchor.constraint(equalTo: entryImageView.leadingAnchor),
             ])
         
         // DeleteImageButton
-        view.addSubview(deleteImageButton)
-        deleteImageButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(entryDeleteImageButton)
+        entryDeleteImageButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            deleteImageButton.topAnchor.constraint(equalTo: addImageButton.topAnchor),
-            deleteImageButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor)
+            entryDeleteImageButton.topAnchor.constraint(equalTo: entryAddImageButton.topAnchor),
+            entryDeleteImageButton.trailingAnchor.constraint(equalTo: entryImageView.trailingAnchor)
             ])
         
         // RatingButtonBar
         
-        let buttonsArray = [substandardButton, fineButton, spectacularButton]
+        let buttonsArray = [entrySubstandardButton, entryFineButton, entrySpectacularButton]
         
         let ratingButtonBar = UIStackView(arrangedSubviews: buttonsArray)
         ratingButtonBar.axis = .horizontal
@@ -291,15 +232,15 @@ class EntryDetailViewController: UIViewController {
                 self.location = placeMark.location
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
-                self.locationLabel.isHidden = false
+                self.entryLocationLabel.isHidden = false
                 
                 guard let name = placeMark.name, let city = placeMark.locality, let area = placeMark.administrativeArea else {
                     return
                 }
                 
-                self.locationLabel.text = "\(name), \(city), \(area)"
-                self.addLocationButton.setTitle("Location", for: .normal)
-                self.addLocationButton.isEnabled = false
+                self.entryLocationLabel.text = "\(name), \(city), \(area)"
+                self.entryAddLocationButton.setTitle("Location", for: .normal)
+                self.entryAddLocationButton.isEnabled = false
             }
             
         }
@@ -339,10 +280,10 @@ class EntryDetailViewController: UIViewController {
             
             self.entry?.image = nil
             self.imageData = nil
-            self.imageView.image = UIImage(named: "icn_noImage")
-            self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+            self.entryImageView.image = UIImage(named: "icn_noImage")
+            self.entryImageView.layer.borderColor = UIColor.lightGray.cgColor
             self.coreDataStack.saveContext()
-            self.deleteImageButton.isHidden = true
+            self.entryDeleteImageButton.isHidden = true
             
         }
         
@@ -375,7 +316,7 @@ extension EntryDetailViewController {
     
     func savePressed() {
         
-        if noteTextView.text == "" || selectedRating == nil {
+        if entryTextView.text == "" || selectedRating == nil {
             
             self.presentAlert(withTitle: "Oops!", andMessage: "Entries require some text and a mood")
             
@@ -383,7 +324,7 @@ extension EntryDetailViewController {
             
             if let entry = self.entry {
                 
-                entry.note = noteTextView.text
+                entry.note = entryTextView.text
                 entry.rating = selectedRating?.rawValue
                 entry.image = imageData
                 
@@ -398,7 +339,7 @@ extension EntryDetailViewController {
                 coreDataStack.saveContext()
                 
             } else {
-                entry = Entry.entry(withNote: noteTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
+                entry = Entry.entry(withNote: entryTextView.text, image: self.imageData, rating: selectedRating?.rawValue, and: location)
                 coreDataStack.saveContext()
             }
             
@@ -416,46 +357,46 @@ extension EntryDetailViewController {
     
     func setupRatingButtons() {
         
-        spectacularButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
-        spectacularButton.imageView?.contentMode = .center
-        spectacularButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
-        spectacularButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
+        entrySpectacularButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
+        entrySpectacularButton.imageView?.contentMode = .center
+        entrySpectacularButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        entrySpectacularButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
         
-        fineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
-        fineButton.imageView?.contentMode = .center
-        fineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
-        fineButton.addTarget(self, action: #selector(fineSelected), for: .touchUpInside)
+        entryFineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
+        entryFineButton.imageView?.contentMode = .center
+        entryFineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+        entryFineButton.addTarget(self, action: #selector(fineSelected), for: .touchUpInside)
         
-        substandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
-        substandardButton.imageView?.contentMode = .center
-        substandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
-        substandardButton.addTarget(self, action: #selector(substandardSelected), for: .touchUpInside)
+        entrySubstandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
+        entrySubstandardButton.imageView?.contentMode = .center
+        entrySubstandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+        entrySubstandardButton.addTarget(self, action: #selector(substandardSelected), for: .touchUpInside)
 
         
     }
     
     func setRating(rating: Rating) {
         
-        self.spectacularButton.alpha = 0.5
-        self.fineButton.alpha = 0.5
-        self.substandardButton.alpha = 0.5
+        self.entrySpectacularButton.alpha = 0.5
+        self.entryFineButton.alpha = 0.5
+        self.entrySubstandardButton.alpha = 0.5
         
         switch rating {
             
         case .spectacular:
             
             selectedRating = Rating.spectacular
-            spectacularButton.alpha = 1.0
+            entrySpectacularButton.alpha = 1.0
         
         case .fine:
             
             selectedRating = Rating.fine
-            fineButton.alpha = 1.0
+            entryFineButton.alpha = 1.0
         
         case .substandard:
             
             selectedRating = Rating.substandard
-            substandardButton.alpha = 1.0
+            entrySubstandardButton.alpha = 1.0
             
         }
         
@@ -481,12 +422,12 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         manager.dismissImagePickerController(animated: true) {
-            self.imageView.contentMode = .scaleAspectFill
-            self.addImageButton.setTitle("Edit Image", for: .normal)
-            self.imageView.clipsToBounds = true
-            self.imageView.image = image
+            self.entryImageView.contentMode = .scaleAspectFill
+            self.entryAddImageButton.setTitle("Edit Image", for: .normal)
+            self.entryImageView.clipsToBounds = true
+            self.entryImageView.image = image
             self.imageData = UIImageJPEGRepresentation(image, 1.0)
-            self.deleteImageButton.isHidden = false
+            self.entryDeleteImageButton.isHidden = false
         }
     }
     
@@ -501,3 +442,68 @@ extension EntryDetailViewController {
     }
     
 }
+
+// MARK: - EntryDetailModelView
+
+extension EntryDetailViewController: EntryDetailModelView {
+    
+    var noteTextView: UITextView {
+        return entryTextView
+    }
+    
+    var addLocationButton: UIButton {
+        return entryAddLocationButton
+    }
+    
+    var locationLabel: UILabel {
+        return entryLocationLabel
+    }
+    
+    var addImageButton: UIButton {
+        return entryAddImageButton
+    }
+    
+    var deleteImageButton: UIButton {
+        return entryDeleteImageButton
+    }
+    
+    var imageView: UIImageView {
+        return entryImageView
+    }
+    
+    var spectacularButton: UIButton {
+        return entrySpectacularButton
+    }
+    
+    var fineButton: UIButton {
+        return entryFineButton
+    }
+    
+    var substandardButton: UIButton {
+        return entrySubstandardButton
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

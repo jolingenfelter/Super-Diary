@@ -76,41 +76,44 @@ public final class EntryDetailViewModel {
     }
 }
 
-extension EntryDetailModelView {
+extension EntryDetailViewModel {
     
-    func configureView(_ view: EntryDetailViewModel) {
+    func configureView(_ view: EntryDetailModelView) {
         
-        if let entry = view.entry {
-            noteTextView?.text = entry.note
+        if let entry = entry {
+            view.noteTextView?.text = entry.note
         }
         
-        if let rating = view.rating {
+        if let rating = rating {
+            
+            view.spectacularButton?.alpha = 0.5
+            view.fineButton?.alpha = 0.5
+            view.substandardButton?.alpha = 0.5
+            
             switch rating {
                 
             case .spectacular:
-                spectacularButton?.alpha = 1.0
+                view.spectacularButton?.alpha = 1.0
             case .fine:
-                fineButton?.alpha = 1.0
+                view.fineButton?.alpha = 1.0
             case .substandard:
-                substandardButton?.alpha = 1.0
-                
+                view.substandardButton?.alpha = 1.0
             }
 
         } else {
-            spectacularButton?.alpha = 0.5
-            fineButton?.alpha = 0.5
-            substandardButton?.alpha = 0.5
+            view.spectacularButton?.alpha = 0.5
+            view.fineButton?.alpha = 0.5
+            view.substandardButton?.alpha = 0.5
         }
         
-        if let locationString = view.locationString {
-            
-            addLocationButton?.setTitle("Location", for: .normal)
-            addLocationButton?.isEnabled = false
-            locationLabel?.text = locationString
+        if let locationString = locationString {
+            view.addLocationButton?.setTitle("Location", for: .normal)
+            view.addLocationButton?.isEnabled = false
+            view.locationLabel?.text = locationString
         }
         
-        if let image = view.image {
-            imageView?.image = image
+        if let image = image {
+            view.imageView?.image = image
         }
         
     }
