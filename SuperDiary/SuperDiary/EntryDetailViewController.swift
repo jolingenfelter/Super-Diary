@@ -92,9 +92,9 @@ class EntryDetailViewController: UIViewController {
     }()
     
     // Rating Buttons
-    let spectacularButton = UIButton()
-    let fineButton = UIButton()
-    let substandardButton = UIButton()
+    var spectacularButton = UIButton()
+    var fineButton = UIButton()
+    var substandardButton = UIButton()
     
     // Location
     var locationManager: LocationManager!
@@ -126,7 +126,6 @@ class EntryDetailViewController: UIViewController {
             let image = UIImage(data: data as Data)
             imageView.image = image
             addImageButton.setTitle("Edit Image", for: .normal)
-            imageView.layer.borderWidth = 0
             deleteImageButton.isHidden = false
         } else {
             deleteImageButton.isHidden = true
@@ -482,11 +481,10 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
     
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         manager.dismissImagePickerController(animated: true) {
-            self.imageView.contentMode = .scaleAspectFit
+            self.imageView.contentMode = .scaleAspectFill
             self.addImageButton.setTitle("Edit Image", for: .normal)
             self.imageView.clipsToBounds = true
             self.imageView.image = image
-            self.imageView.layer.borderWidth = 0.0
             self.imageData = UIImageJPEGRepresentation(image, 1.0)
             self.deleteImageButton.isHidden = false
         }
