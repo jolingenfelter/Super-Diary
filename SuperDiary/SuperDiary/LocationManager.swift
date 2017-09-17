@@ -85,12 +85,3 @@ extension LocationManager: CLLocationManagerDelegate {
         
     }
 }
-
-
-
-
-
-
-
-
-
