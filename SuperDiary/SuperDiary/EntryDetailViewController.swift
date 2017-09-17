@@ -17,17 +17,15 @@ class EntryDetailViewController: UIViewController {
     var imageData: Data?
     
     // Views
-    
     var entryTextView = UITextView()
-    
-    lazy var entryAddLocationButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(addLocation), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    lazy var entryLocationLabel = UILabel()
+    var entryAddLocationButton = UIButton()
+    var entryLocationLabel = UILabel()
+    var entryAddImageButton = UIButton()
+    var entryDeleteImageButton = UIButton()
+    var entryImageView = UIImageView()
+    var entrySpectacularButton = UIButton()
+    var entryFineButton = UIButton()
+    var entrySubstandardButton = UIButton()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -41,28 +39,6 @@ class EntryDetailViewController: UIViewController {
         return manager
     }()
     
-    lazy var entryAddImageButton: UIButton = {
-        let addImageButton = UIButton()
-        addImageButton.addTarget(self, action: #selector(addImage), for: .touchUpInside)
-        
-        return addImageButton
-    }()
-    
-    lazy var entryDeleteImageButton: UIButton = {
-        let deleteImageButton = UIButton()
-        deleteImageButton.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
-        
-        return deleteImageButton
-
-    }()
-    
-    var entryImageView = UIImageView()
-    
-    // Rating Buttons
-    var entrySpectacularButton = UIButton()
-    var entryFineButton = UIButton()
-    var entrySubstandardButton = UIButton()
-    
     // Location
     var locationManager: LocationManager!
     var location: CLLocation?
@@ -75,6 +51,7 @@ class EntryDetailViewController: UIViewController {
         super.viewDidLoad()
         navbarSetup()
         setupRatingButtons()
+        buttonSetup()
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
         
@@ -184,6 +161,12 @@ class EntryDetailViewController: UIViewController {
     }
     
     // MARK: - Buttons
+    
+    func buttonSetup() {
+        entryAddLocationButton.addTarget(self, action: #selector(addLocation), for: .touchUpInside)
+        entryAddImageButton.addTarget(self, action: #selector(addImage), for: .touchUpInside)
+        entryDeleteImageButton.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
+    }
     
     // Add Location
     
@@ -451,26 +434,3 @@ extension EntryDetailViewController: EntryDetailModelView {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
