@@ -122,6 +122,9 @@ extension EntryDetailViewModel {
         
         if let image = image {
             view.imageView?.image = image
+            view.addImageButton?.setTitle("Edit", for: .normal)
+        } else {
+            view.deleteImageButton?.isHidden = true
         }
         
     }
@@ -161,7 +164,7 @@ extension EntryDetailViewModel {
     }
     
     private func imageViewProperties(_ view: EntryDetailModelView) {
-        view.imageView?.contentMode = .scaleAspectFit
+        view.imageView?.contentMode = .scaleAspectFill
         view.imageView?.clipsToBounds = true
         view.imageView?.layer.masksToBounds = true
         view.imageView?.layer.borderColor = UIColor.lightGray.cgColor
@@ -169,17 +172,3 @@ extension EntryDetailViewModel {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

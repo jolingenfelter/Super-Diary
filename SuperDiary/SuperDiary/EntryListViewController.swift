@@ -55,8 +55,7 @@ extension EntryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let entry = dataSource.fetchedResultsController.object(at: indexPath) as! Entry
-        let entryDetailViewController = EntryDetailViewController()
-        entryDetailViewController.entry = entry
+        let entryDetailViewController = EntryDetailViewController(entry: entry)
         let navigationController = UINavigationController(rootViewController: entryDetailViewController)
         self.present(navigationController, animated: true, completion: nil)
         
@@ -79,7 +78,7 @@ extension EntryListViewController {
     
     func newEntryPressed() {
         
-        let entryDetailViewController = EntryDetailViewController()
+        let entryDetailViewController = EntryDetailViewController(entry: nil)
         let navigationController = UINavigationController(rootViewController: entryDetailViewController)
         self.present(navigationController, animated: true, completion: nil)
         

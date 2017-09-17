@@ -17,15 +17,15 @@ class EntryDetailViewController: UIViewController {
     var imageData: Data?
     
     // Views
-    var entryTextView = UITextView()
-    var entryAddLocationButton = UIButton()
-    var entryLocationLabel = UILabel()
-    var entryAddImageButton = UIButton()
-    var entryDeleteImageButton = UIButton()
-    var entryImageView = UIImageView()
-    var entrySpectacularButton = UIButton()
-    var entryFineButton = UIButton()
-    var entrySubstandardButton = UIButton()
+    let entryTextView = UITextView()
+    let entryAddLocationButton = UIButton()
+    let entryLocationLabel = UILabel()
+    let entryAddImageButton = UIButton()
+    let entryDeleteImageButton = UIButton()
+    let entryImageView = UIImageView()
+    let entrySpectacularButton = UIButton()
+    let entryFineButton = UIButton()
+    let entrySubstandardButton = UIButton()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -47,6 +47,19 @@ class EntryDetailViewController: UIViewController {
         return EntryDetailViewModel(entry: self.entry)
     }()
     
+    init(entry: Entry?) {
+        self.entry = entry
+        if let entry = entry {
+            selectedRating = Rating(rawValue: entry.rating!)!
+            imageData = entry.image
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navbarSetup()
@@ -56,6 +69,7 @@ class EntryDetailViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         entryViewModel.configureView(self)
+        self.title = entryViewModel.dateString
     }
     
     override func didReceiveMemoryWarning() {
@@ -189,6 +203,7 @@ class EntryDetailViewController: UIViewController {
                 }
                 
                 self.entryLocationLabel.text = "\(name), \(city), \(area)"
+                self.entryLocationLabel.textColor = .lightGray
                 self.entryAddLocationButton.setTitle("Location", for: .normal)
                 self.entryAddLocationButton.isEnabled = false
             }
