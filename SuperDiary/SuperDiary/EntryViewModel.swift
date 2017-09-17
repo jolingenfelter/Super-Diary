@@ -78,7 +78,15 @@ public final class EntryDetailViewModel {
 
 extension EntryDetailViewModel {
     
+    // MARK: - Configure View
+    
     func configureView(_ view: EntryDetailModelView) {
+        
+        textViewProperties(view)
+        locationButtonProperties(view)
+        addImageButtonProperties(view)
+        deleteImageButtonProperties(view)
+        imageViewProperties(view)
         
         if let entry = entry {
             view.noteTextView?.text = entry.note
@@ -118,4 +126,60 @@ extension EntryDetailViewModel {
         
     }
     
+    // MARK: - View Properties
+    
+    private func textViewProperties(_ view: EntryDetailModelView) {
+        view.noteTextView?.layer.borderColor = UIColor.lightGray.cgColor
+        view.noteTextView?.layer.borderWidth = 1.5
+        view.noteTextView?.font = .systemFont(ofSize: 16)
+    }
+    
+    private func locationButtonProperties(_ view: EntryDetailModelView) {
+        view.addLocationButton?.setTitle("Add location", for: .normal)
+        view.addLocationButton?.setTitleColor(.lightGray , for: .normal)
+        let geolocateImage = UIImage(named: "icn_geolocate")
+        view.addLocationButton?.setImage(geolocateImage, for: .normal)
+        view.addLocationButton?.imageEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0)
+        view.addLocationButton?.titleLabel?.textAlignment = .left
+    }
+    
+    private func locationLabelProperties(_ view: EntryDetailModelView) {
+        view.locationLabel?.textColor = UIColor.lightGray
+        view.locationLabel?.adjustsFontSizeToFitWidth = true
+    }
+    
+    private func addImageButtonProperties(_ view: EntryDetailModelView) {
+        view.addImageButton?.setTitle("Add image", for: .normal)
+        view.addImageButton?.setTitleColor(.lightGray, for: .normal)
+        view.addImageButton?.titleLabel?.textAlignment = .left
+    }
+    
+    private func deleteImageButtonProperties(_ view: EntryDetailModelView) {
+        view.deleteImageButton?.setTitle("Delete", for: .normal)
+        view.deleteImageButton?.setTitleColor(.lightGray, for: .normal)
+        view.deleteImageButton?.titleLabel?.textAlignment = .left
+    }
+    
+    private func imageViewProperties(_ view: EntryDetailModelView) {
+        view.imageView?.contentMode = .scaleAspectFit
+        view.imageView?.clipsToBounds = true
+        view.imageView?.layer.masksToBounds = true
+        view.imageView?.layer.borderColor = UIColor.lightGray.cgColor
+        view.imageView?.layer.borderWidth = 1.5
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

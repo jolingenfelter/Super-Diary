@@ -18,35 +18,16 @@ class EntryDetailViewController: UIViewController {
     
     // Views
     
-    lazy var entryTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 1.5
-        textView.font = .systemFont(ofSize: 16)
-       
-        return textView
-    }()
+    var entryTextView = UITextView()
     
     lazy var entryAddLocationButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add location", for: .normal)
-        button.setTitleColor(.lightGray , for: .normal)
-        let geolocateImage = UIImage(named: "icn_geolocate")
-        button.setImage(geolocateImage, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0)
-        button.titleLabel?.textAlignment = .left
         button.addTarget(self, action: #selector(addLocation), for: .touchUpInside)
         
         return button
     }()
     
-    lazy var entryLocationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.lightGray
-        label.adjustsFontSizeToFitWidth = true
-        
-        return label
-    }()
+    lazy var entryLocationLabel = UILabel()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -61,35 +42,21 @@ class EntryDetailViewController: UIViewController {
     }()
     
     lazy var entryAddImageButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Add image", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
-        button.titleLabel?.textAlignment = .left
-        button.addTarget(self, action: #selector(addImage), for: .touchUpInside)
+        let addImageButton = UIButton()
+        addImageButton.addTarget(self, action: #selector(addImage), for: .touchUpInside)
         
-        return button
+        return addImageButton
     }()
     
     lazy var entryDeleteImageButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Delete", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
-        button.titleLabel?.textAlignment = .left
-        button.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
+        let deleteImageButton = UIButton()
+        deleteImageButton.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
         
-        return button
+        return deleteImageButton
 
     }()
     
-    lazy var entryImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.lightGray.cgColor
-        imageView.layer.borderWidth = 1.5
-        return imageView
-    }()
+    var entryImageView = UIImageView()
     
     // Rating Buttons
     var entrySpectacularButton = UIButton()
