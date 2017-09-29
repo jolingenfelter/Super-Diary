@@ -76,7 +76,7 @@ extension EntryListViewController {
         navigationItem.rightBarButtonItem = addEntryButton
     }
     
-    func newEntryPressed() {
+    @objc func newEntryPressed() {
         
         let entryDetailViewController = EntryDetailViewController(entry: nil)
         let navigationController = UINavigationController(rootViewController: entryDetailViewController)

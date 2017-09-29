@@ -184,7 +184,7 @@ class EntryDetailViewController: UIViewController {
     
     // Add Location
     
-    func addLocation() {
+    @objc func addLocation() {
         
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
@@ -214,7 +214,7 @@ class EntryDetailViewController: UIViewController {
     
     // AddImage
     
-    func addImage() {
+    @objc func addImage() {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -237,7 +237,7 @@ class EntryDetailViewController: UIViewController {
     
     // DeleteImage
     
-    func deleteImage() {
+    @objc func deleteImage() {
         
         let alert = UIAlertController(title: "Are you sure you want to delete this image?", message: "This action cannot be undone", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -275,11 +275,11 @@ extension EntryDetailViewController {
         
     }
     
-    func cancelPressed() {
+    @objc func cancelPressed() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func savePressed() {
+    @objc func savePressed() {
         
         if entryTextView.text == "" || selectedRating == nil {
             
@@ -324,17 +324,17 @@ extension EntryDetailViewController {
         
         entrySpectacularButton.setImage(UIImage(named: "icn_good_lrg"), for: .normal)
         entrySpectacularButton.imageView?.contentMode = .center
-        entrySpectacularButton.backgroundColor = UIColor(colorLiteralRed: 125/255, green: 156/255, blue: 91/255, alpha: 1)
+        entrySpectacularButton.backgroundColor = UIColor(red: 125/255, green: 156/255, blue: 91/255, alpha: 1)
         entrySpectacularButton.addTarget(self, action: #selector(superSelected), for: .touchUpInside)
         
         entryFineButton.setImage(UIImage(named: "icn_average_lrg"), for: .normal)
         entryFineButton.imageView?.contentMode = .center
-        entryFineButton.backgroundColor = UIColor(colorLiteralRed: 247/255, green: 167/255, blue: 0, alpha: 1)
+        entryFineButton.backgroundColor = UIColor(red: 247/255, green: 167/255, blue: 0, alpha: 1)
         entryFineButton.addTarget(self, action: #selector(fineSelected), for: .touchUpInside)
         
         entrySubstandardButton.setImage(UIImage(named: "icn_bad_lrg"), for: .normal)
         entrySubstandardButton.imageView?.contentMode = .center
-        entrySubstandardButton.backgroundColor = UIColor(colorLiteralRed: 226/255, green: 95/255, blue: 93/255, alpha: 1)
+        entrySubstandardButton.backgroundColor = UIColor(red: 226/255, green: 95/255, blue: 93/255, alpha: 1)
         entrySubstandardButton.addTarget(self, action: #selector(substandardSelected), for: .touchUpInside)
 
         
@@ -367,15 +367,15 @@ extension EntryDetailViewController {
         
     }
     
-    func superSelected() {
+    @objc func superSelected() {
         setRating(rating: Rating.spectacular)
     }
     
-    func fineSelected() {
+    @objc func fineSelected() {
         setRating(rating: Rating.fine)
     }
     
-    func substandardSelected() {
+    @objc func substandardSelected() {
         setRating(rating: Rating.substandard)
     }
     

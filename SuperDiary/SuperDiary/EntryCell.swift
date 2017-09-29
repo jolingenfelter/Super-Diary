@@ -50,7 +50,7 @@ class EntryCell: UITableViewCell {
         // MARK: - DateLabel
         
         self.contentView.addSubview(entryDateLabel)
-        entryDateLabel.textColor = UIColor(colorLiteralRed: 39/255, green: 107/255, blue: 134/255, alpha: 1)
+        entryDateLabel.textColor = UIColor(red: 39/255, green: 107/255, blue: 134/255, alpha: 1)
         entryDateLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         entryDateLabel.translatesAutoresizingMaskIntoConstraints = false
         
