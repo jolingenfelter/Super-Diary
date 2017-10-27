@@ -33,7 +33,11 @@ public final class EntryDetailViewModel {
     var entry: Entry?
     var locationManager: LocationManager!
     var location: CLLocation?
-    var locationString: String?
+    var locationString: String? {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
+        }
+    }
     var rating: Rating?
     var dateString: String?
     var image: UIImage?
@@ -60,7 +64,7 @@ public final class EntryDetailViewModel {
             
             let locationPoint = CLLocation(latitude: latitude, longitude: longitude)
             self.location = locationPoint
-            
+    
             locationManager.getPlacemark(forLocation: locationPoint, completionHandler: { (placemark, error) in
                 if let placemark = placemark {
                     guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }

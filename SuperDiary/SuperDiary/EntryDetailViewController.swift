@@ -70,6 +70,12 @@ class EntryDetailViewController: UIViewController {
         
         entryViewModel.configureView(self)
         self.title = entryViewModel.dateString
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(EntryDetailViewController.updateLocation), name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -190,24 +196,32 @@ class EntryDetailViewController: UIViewController {
         activityIndicator.startAnimating()
         
         locationManager = LocationManager()
-        locationManager.onLocationFix = { placeMark, error in
+        locationManager.onLocationFix = { [weak self] placeMark, error in
+            
+            guard let strongSelf = self else {
+                return
+            }
         
             if let placeMark = placeMark {
-                self.location = placeMark.location
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                self.entryLocationLabel.isHidden = false
+                strongSelf.location = placeMark.location
+                strongSelf.activityIndicator.stopAnimating()
+                strongSelf.activityIndicator.isHidden = true
+                strongSelf.entryLocationLabel.isHidden = false
                 
                 guard let name = placeMark.name, let city = placeMark.locality, let area = placeMark.administrativeArea else {
                     return
                 }
                 
-                self.entryLocationLabel.text = "\(name), \(city), \(area)"
-                self.entryLocationLabel.textColor = .lightGray
-                self.entryAddLocationButton.setTitle("Location", for: .normal)
-                self.entryAddLocationButton.isEnabled = false
+                strongSelf.entryLocationLabel.text = "\(name), \(city), \(area)"
+                strongSelf.entryLocationLabel.textColor = .lightGray
+                strongSelf.entryAddLocationButton.setTitle("Location", for: .normal)
+                strongSelf.entryAddLocationButton.isEnabled = false
             }
             
+        }
+        
+        @objc func updateLocation() {
+            self.locationLabel.text = entryViewModel.locationString
         }
         
     }
