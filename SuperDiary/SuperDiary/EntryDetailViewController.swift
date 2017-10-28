@@ -44,7 +44,9 @@ class EntryDetailViewController: UIViewController {
     var location: CLLocation?
     
     lazy var entryViewModel: EntryDetailViewModel = {
-        return EntryDetailViewModel(entry: self.entry)
+        let viewModel = EntryDetailViewModel(entry: self.entry)
+        viewModel.delegate = self
+        return viewModel
     }()
     
     init(entry: Entry?) {
@@ -71,7 +73,7 @@ class EntryDetailViewController: UIViewController {
         entryViewModel.configureView(self)
         self.title = entryViewModel.dateString
         
-        NotificationCenter.default.addObserver(self, selector: #selector(EntryDetailViewController.updateLocation), name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLocation), name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
     }
     
     deinit {
@@ -220,10 +222,10 @@ class EntryDetailViewController: UIViewController {
             
         }
         
-        @objc func updateLocation() {
-            self.locationLabel.text = entryViewModel.locationString
-        }
-        
+    }
+    
+    @objc func updateLocation() {
+        self.locationLabel.text = entryViewModel.locationString
     }
     
     // AddImage
@@ -410,6 +412,14 @@ extension EntryDetailViewController: MediaPickerManagerDelegate {
         }
     }
     
+}
+
+// MARK: - ViewModelDelegate
+
+extension EntryDetailViewController: EntryDetailViewModelDelegate {
+    func didSet(locationString: String?) {
+        self.locationLabel.text = locationString
+    }
 }
 
 // MARK: - Gestures

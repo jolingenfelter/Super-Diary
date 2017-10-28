@@ -21,7 +21,13 @@ import CoreLocation
     @objc optional var substandardButton: UIButton { get }
 }
 
+protocol EntryDetailViewModelDelegate {
+    func didSet(locationString: String?)
+}
+
 public final class EntryDetailViewModel {
+    
+    var delegate: EntryDetailViewModelDelegate!
     
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -35,7 +41,8 @@ public final class EntryDetailViewModel {
     var location: CLLocation?
     var locationString: String? {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
+            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
+            //delegate.didSet(locationString: oldValue)
         }
     }
     var rating: Rating?
@@ -58,20 +65,20 @@ public final class EntryDetailViewModel {
         }
         
         if let location = entry.location {
-            
+
             let latitude = location.latitude
             let longitude = location.longitude
-            
+
             let locationPoint = CLLocation(latitude: latitude, longitude: longitude)
             self.location = locationPoint
-    
+
             locationManager.getPlacemark(forLocation: locationPoint, completionHandler: { (placemark, error) in
                 if let placemark = placemark {
                     guard let name = placemark.name, let city = placemark.locality, let area = placemark.administrativeArea else { return }
                 self.locationString  = "\(name), \(city), \(area)"
+                self.delegate.didSet(locationString: self.locationString)
                 }
             })
-            
         }
         
         if let image = entry.userImage {
