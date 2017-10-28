@@ -39,12 +39,7 @@ public final class EntryDetailViewModel {
     var entry: Entry?
     var locationManager: LocationManager!
     var location: CLLocation?
-    var locationString: String? {
-        didSet {
-            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationSet"), object: nil)
-            //delegate.didSet(locationString: oldValue)
-        }
-    }
+    var locationString: String? 
     var rating: Rating?
     var dateString: String?
     var image: UIImage?
